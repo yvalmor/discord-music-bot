@@ -1,4 +1,4 @@
-const { prefix } = require('../../config.json');
+/*const { prefix } = require('./config.json');
 const { Command } = require('discord.js-commando');
 
 module.exports = class HelpCommand extends Command {
@@ -15,9 +15,9 @@ module.exports = class HelpCommand extends Command {
 
     run(message, args) {
         const data = [];
-        const { commands } = message.client;
+        const { commands } = message.client;*/
 
-        if (!args.length) {
+        /*if (!args.length) {
             data.push('Here\'s a list of all the commands:');
             data.push(commands.map(command =>
                 `\t${command.name}${command.aliases ? ` / ${command.aliases.join(' / ')}` : ''} ${command.usage}`)
@@ -48,4 +48,4 @@ module.exports = class HelpCommand extends Command {
                 message.reply('it seems like I can\'t DM you! Do you have DMs disabled?');
             });
     };
-}
+}*/

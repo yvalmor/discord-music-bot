@@ -42,7 +42,12 @@ client.registry
     ])
     .registerDefaultGroups()
     .registerDefaultCommands({
-        help: false,
+        eval: false,
+        load: false,
+        reload: false,
+        unload: false,
+        enable: false,
+        disable: false,
     })
     .registerCommandsIn(path.join(__dirname, 'commands'));
 

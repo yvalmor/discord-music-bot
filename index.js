@@ -6,15 +6,22 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const { author_id, prefix, token } = require('./config.json');
 
-Structures.extend('Guild', Guild => {
+Structures.extend('Guild', function(Guild) {
     class MusicGuild extends Guild {
         constructor(client, data) {
             super(client, data);
             this.musicData = {
                 queue: [],
                 isPlaying: false,
-                volume: 1,
+                nowPlaying: null,
                 songDispatcher: null,
+                volume: 1
+            };
+            this.triviaData = {
+                isTriviaRunning: false,
+                wasTriviaEndCalled: false,
+                triviaQueue: [],
+                triviaScore: new Map()
             };
         }
     }
@@ -36,7 +43,6 @@ client.registry
     .registerDefaultGroups()
     .registerDefaultCommands({
         help: false,
-        restart: false,
     })
     .registerCommandsIn(path.join(__dirname, 'commands'));
 

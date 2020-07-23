@@ -18,10 +18,13 @@ module.exports = class ReloadCommand extends Command {
             return message.reply("Action unauthorised")
 
         if (!args.length) {
+            console.log('Restarting...')
             return message.channel.send(`Restarting...`)
                 .then(() => message.client.destroy())
                 .then(() => message.client.login(token))
-                .then(() => message.channel.send(`Restarted!`));
+                .then(() => message.channel.send(`Restarted!`))
+                .then(() => console.log('Restarted!'));
+
         }
 
         const commandName = args[0].toLowerCase();

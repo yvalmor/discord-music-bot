@@ -1,4 +1,4 @@
-const { prefix } = require('../../config.json');
+const { prefix } = require('../config.json');
 const { Command } = require('discord.js-commando');
 
 module.exports = class HelpCommand extends Command {

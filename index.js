@@ -68,7 +68,7 @@ client.once("disconnect", () => {
 // Login
 client.login(token);
 
-client.on('message', message => {
+/*client.on('message', message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -84,4 +84,4 @@ client.on('message', message => {
         console.error(error);
         message.reply('there was an error trying to execute that command!');
     }
-});
+});*/

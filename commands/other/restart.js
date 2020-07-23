@@ -5,9 +5,9 @@ module.exports = class ReloadCommand extends Command {
 
     constructor(client){
         super(client, {
-            name: 'reload',
+            name: 'restart',
             group: 'other',
-            memberName: 'reload',
+            memberName: 'restart',
             description: 'reload a command or the entire bot, OWNER ONLY',
             usage: '[command name]',
         });

@@ -37,6 +37,7 @@ const client = new CommandoClient({
 client.registry
     .registerDefaultTypes()
     .registerGroups([
+        ['dice', 'Dice Command Group'],
         ['music', 'Music Command Group'],
         ['other', 'Other Command Group'],
     ])

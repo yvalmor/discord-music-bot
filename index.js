@@ -36,7 +36,6 @@ client.registry
     .registerDefaultGroups()
     .registerDefaultCommands({
         help: false,
-        reload: false,
         restart: false,
     })
     .registerCommandsIn(path.join(__dirname, 'commands'));

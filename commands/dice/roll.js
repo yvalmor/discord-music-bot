@@ -34,32 +34,39 @@ module.exports = class ReloadCommand extends Command {
         });
     }
 
-    run(message, { faces, rollNumber }){
+    async run(message, { faces, rollNumber }){
+
         let rnd;
         let rollResults = new MessageEmbed()
             .setColor('#172fc9')
-            .setTitle(`${message.author}, you rolled:`)
+            .setTitle(`${message.author.username}, you rolled:`)
 
         let nbFail = 0,
             nbWin = 0;
 
         for (let i = 0; i < rollNumber; i++) {
+            console.log(i)
+
             rnd = Math.floor(Math.random() * faces + 1);
 
             if (rnd == faces) {
-                rollResults.addField(`Roll n°${i}`, `${rnd.toString()}, réussite critique`);
+                rollResults.addField(`Roll n°${i + 1}`, `${rnd.toString()}, réussite critique`);
                 nbWin++;
             } else if (rnd == 1) {
-                rollResults.addField(`Roll n°${i}`, `${rnd.toString()}, échec critique`);
+                rollResults.addField(`Roll n°${i + 1}`, `${rnd.toString()}, échec critique`);
                 nbFail++;
             } else
-                rollResults.addField(`Roll n°${i}`, `${rnd.toString()}`)
+                rollResults.addField(`Roll n°${i + 1}`, `${rnd.toString()}`)
         }
 
-        if (nbFail < nbWin)
-            rollResults.setImage(this.random_item(failure))
-        else if (nbFail !== nbWin)
-            rollResults.setImage(this.random_item(success))
+        if (nbFail < nbWin) {
+            rollResults.setImage(this.random_item(success));
+        }
+        else if (nbFail > nbWin) {
+            rollResults.setImage(this.random_item(failure));
+        }
+
+        await message.channel.send({ embed: rollResults });
     }
 
     random_item(items){

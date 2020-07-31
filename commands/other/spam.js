@@ -55,7 +55,7 @@ module.exports = class SpamCommand extends Command {
         });
     }
 
-    run(message, { times, userString, spamMessage }) {
+    run = (message, { times, userString, spamMessage }) => {
         console.log(`spamming ${userString} ${times} times`)
 
         if (message.author.id !== author_id && !authorised_ids.includes(message.author))
@@ -73,5 +73,5 @@ module.exports = class SpamCommand extends Command {
         for (let i = 0; i < times; i++)
             users.forEach(user => user.send(toSend))
 
-    }
+    };
 }

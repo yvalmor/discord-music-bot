@@ -17,6 +17,7 @@ module.exports = class SpamCommand extends Command {
                         'how many times do you want to spam them ?',
                     type: 'integer',
                     validate: function (times) {
+                        console.log("times okay");
                         return times > 0;
                     }
                 },
@@ -26,29 +27,42 @@ module.exports = class SpamCommand extends Command {
                         'Who do you want to spam ?',
                     type: 'string',
                     validate: function (userString) {
-                        if (userString === "")
+                        if (userString === "") {
+                            console.log("userString not okay");
                             return false;
+                        }
 
                         let users = userString.split(' ');
 
                         for (let i = 0; i < users.length; i++){
-                            if (client.users.find(user => user.username == users[i]).id == null)
+                            if (client.users.find(user => user.username == users[i]).id == null) {
+                                console.log(`username ${users[i]} not okay`);
                                 return false;
+                            }
                         }
 
+                        console.log("usernames okay");
                         return true;
                     }
                 },
                 {
                     key: 'Message',
                     prompt: 'What message do you want to send them?',
-                    type: 'string'
+                    type: 'string',
+                    validate: function (string) {
+                        if (string === "")
+                            console.log("message not okay");
+
+                        return string === "";
+                    }
                 }
             ]
         });
     }
 
     run(message, { times, userString, spamMessage }) {
+        console.log(`spamming ${userString} ${times} times`)
+
         if (message.author.id != author_id && !authorised_ids.includes(message.author))
             return message.reply("You're not authorised to use this command!")
 
@@ -60,5 +74,6 @@ module.exports = class SpamCommand extends Command {
 
         for (let i = 0; i < times; i++)
             users.forEach(user => user.send(toSend))
+
     }
 }

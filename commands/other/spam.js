@@ -17,37 +17,30 @@ module.exports = class SpamCommand extends Command {
                         'how many times do you want to spam them ?',
                     type: 'integer',
                     validate: function (times) {
-                        console.log("times okay");
                         return times > 0;
                     }
                 },
                 {
-                    key: 'Users',
+                    key: 'userString',
                     prompt:
                         'Who do you want to spam ?',
                     type: 'string',
                     validate: function (userString) {
-                        if (userString === "") {
-                            console.log("userString not okay");
+                        if (userString === "")
                             return false;
-                        }
 
                         let users = userString.split(' ');
 
                         for (let i = 0; i < users.length; i++){
                             if (client.users.cache.find(user => users.includes(user.username)) == null)
-                            {
-                                console.log(`username ${users[i]} not okay`);
                                 return false;
-                            }
                         }
 
-                        console.log("usernames okay");
                         return true;
                     }
                 },
                 {
-                    key: 'Message',
+                    key: 'spamMessage',
                     prompt: 'What message do you want to send them?',
                     type: 'string',
                 }
@@ -58,20 +51,24 @@ module.exports = class SpamCommand extends Command {
     run = (message, { times, userString, spamMessage }) => {
         console.log(`spamming ${userString} ${times} times`)
 
-        if (message.author.id !== author_id && !authorised_ids.includes(message.author))
+        if (message.author.id !== author_id && !authorised_ids.includes(message.author.id))
             return message.reply("You're not authorised to use this command!")
 
-        const usernames = userString.split(' ');
-        const guild_users = [];
+        const usernames = userString.toLowerCase().split(' ');
 
-        message.guild.members.forEach(member => guild_users.push(member.user.username));
+        let users = [];
 
-        const users = guild_users.filter(user => usernames.includes(user.username));
+        for (let i = 0; i < usernames.length; i++)
+            users.push(message.client.users.cache.find(
+                user => usernames.includes(user.username.toLowerCase()) && !users.find(u => u.username === user.username)))
 
-        const toSend = `<@${message.author.id}> would like to tell you this:\n` + spamMessage;
+        message.reply("Beginning spam")
 
+        for (let i = 0; i < users.length; i++)
+            users[i].send(`<@${message.author.id}> would like to tell you this:`);
+
+        for (let j = 0; j < users.length; j++)
         for (let i = 0; i < times; i++)
-            users.forEach(user => user.send(toSend))
-
+            users[j].send(`<@${users[j].id}> ${spamMessage}`);
     };
 }

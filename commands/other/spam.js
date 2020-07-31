@@ -35,7 +35,7 @@ module.exports = class SpamCommand extends Command {
                         let users = userString.split(' ');
 
                         for (let i = 0; i < users.length; i++){
-                            if (client.users.array().find(user => users.includes(user.username)) == null)
+                            if (client.users.cache.find(user => users.includes(user.username)) == null)
                             {
                                 console.log(`username ${users[i]} not okay`);
                                 return false;

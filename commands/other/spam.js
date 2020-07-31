@@ -29,7 +29,7 @@ module.exports = class SpamCommand extends Command {
                         if (userString === "")
                             return false;
 
-                        let users = userString.split(' ');
+                        let users = userString.split(', ');
 
                         for (let i = 0; i < users.length; i++){
                             if (client.users.cache.find(user => users.includes(user.username)) == null)
@@ -54,7 +54,7 @@ module.exports = class SpamCommand extends Command {
         if (message.author.id !== author_id && !authorised_ids.includes(message.author.id))
             return message.reply("You're not authorised to use this command!")
 
-        const usernames = userString.toLowerCase().split(' ');
+        const usernames = userString.toLowerCase().split(', ');
 
         let users = [];
 

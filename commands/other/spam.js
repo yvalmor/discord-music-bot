@@ -54,13 +54,13 @@ module.exports = class SpamCommand extends Command {
         if (message.author.id !== author_id && !authorised_ids.includes(message.author.id))
             return message.reply("You're not authorised to use this command!")
 
-        const usernames = userString.toLowerCase().split(', ');
+        const usernames = userString.split(', ');
 
         let users = [];
 
         for (let i = 0; i < usernames.length; i++)
             users.push(message.client.users.cache.find(
-                user => usernames.includes(user.username.toLowerCase()) && !users.find(u => u.username === user.username)))
+                user => usernames.includes(user.username) && !users.find(u => u.username === user.username)))
 
         message.reply("Beginning spam")
 

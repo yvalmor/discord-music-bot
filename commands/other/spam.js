@@ -50,12 +50,6 @@ module.exports = class SpamCommand extends Command {
                     key: 'Message',
                     prompt: 'What message do you want to send them?',
                     type: 'string',
-                    validate: function (string) {
-                        if (string === "")
-                            console.log("message not okay");
-
-                        return string === "";
-                    }
                 }
             ]
         });

@@ -65,10 +65,10 @@ module.exports = class SpamCommand extends Command {
         message.reply("Beginning spam")
 
         for (let i = 0; i < users.length; i++)
-            users[i].send(`<@${message.author.id}> would like to tell you this:`);
+            users[i].send(`<@${message.author.id}> would like to tell you this:`).catch(err => console.log(err));
 
         for (let j = 0; j < users.length; j++)
         for (let i = 0; i < times; i++)
-            users[j].send(`<@${users[j].id}> ${spamMessage}`);
+            users[j].send(`<@${users[j].id}> ${spamMessage}`).catch(err => console.log(err));
     };
 }

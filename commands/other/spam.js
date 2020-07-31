@@ -35,7 +35,7 @@ module.exports = class SpamCommand extends Command {
                         let users = userString.split(' ');
 
                         for (let i = 0; i < users.length; i++){
-                            if (client.users.find(user => user.username == users[i]).id == null) {
+                            if (client.users.get(user => user.username == users[i]).id == null) {
                                 console.log(`username ${users[i]} not okay`);
                                 return false;
                             }
@@ -67,7 +67,10 @@ module.exports = class SpamCommand extends Command {
             return message.reply("You're not authorised to use this command!")
 
         const usernames = userString.split(' ');
-        const guild_users = message.guild.members.forEach(member => console.log(member.user.username));
+        const guild_users = [];
+
+        message.guild.members.forEach(member => guild_users.push(member.user.username));
+
         const users = guild_users.filter(user => usernames.includes(user.username));
 
         const toSend = `<@${message.author.id}> would like to tell you this:\n` + spamMessage;

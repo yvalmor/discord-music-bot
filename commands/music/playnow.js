@@ -1,3 +1,4 @@
+const { Command } = require('discord.js-commando');
 const skipall = require('./skipall');
 const play = require('./play');
 

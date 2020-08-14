@@ -33,14 +33,8 @@ module.exports = class PlayCommand extends Command {
     }
 
     async run(message, { query }) {
-        this.skipall(message);
-
         const voiceChannel = message.member.voice.channel;
         if (!voiceChannel) return message.say('Join a channel and try again');
-
-        if (message.guild.triviaData.isTriviaRunning == true) {
-            return message.say('Please try after the trivia has ended');
-        }
 
         if (
             // if the user entered a youtube playlist url
@@ -57,6 +51,9 @@ module.exports = class PlayCommand extends Command {
                     'There was a problem getting one of the videos in the playlist!'
                 );
             });
+
+            this.skipall(message);
+
             for (let i = 0; i < videosObj.length; i++) {
                 if (videosObj[i].raw.status.privacyStatus == 'private') {
                     continue;
@@ -114,6 +111,9 @@ module.exports = class PlayCommand extends Command {
             //     'There are too many songs in the queue already, skip or wait a bit'
             //   );
             // }
+
+            this.skipall(message);
+
             message.guild.musicData.queue.push(
                 PlayCommand.constructSongObj(video, voiceChannel)
             );
@@ -190,6 +190,9 @@ module.exports = class PlayCommand extends Command {
                         //     'There are too many songs in the queue already, skip or wait a bit'
                         //   );
                         // }
+
+                        this.skipall(message);
+
                         message.guild.musicData.queue.push(
                             PlayCommand.constructSongObj(video, voiceChannel)
                         );

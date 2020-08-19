@@ -215,6 +215,7 @@ module.exports = class Create extends Command {
             character.addField('defense: ', defense, false);
 
         if (traits !== null_word) {
+            traits = traits.split(' ');
             let trait = '';
             for (let i = 0; i < traits.length - 1; i++)
                 trait += `${traits[i]}\n`;
@@ -257,6 +258,8 @@ module.exports = class Create extends Command {
         }
 
         if (skills !== null_word) {
+            skills = skills.split(' ');
+
             character.addField('\u200B', '\u200B');
             let skill = '';
             for (let i = 0; i < skills.length - 1; i++)
@@ -269,6 +272,8 @@ module.exports = class Create extends Command {
         }
 
         if (spells !== null_word) {
+            spells = spells.split(' ');
+
             character.addField('\u200B', '\u200B');
             let spell = '';
             for (let i = 0; i < spells.length - 1; i++)

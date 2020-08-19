@@ -8,6 +8,7 @@ module.exports = class Delete extends Command {
             memberName: 'delete',
             group: 'rpg',
             aliases: ['remove-character', 'rc'],
+            guildOnly: true,
             description:
                 'Delete a character and its data',
             args: [

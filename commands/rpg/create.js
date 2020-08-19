@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const { Command } = require('discord.js-commando');
+const { null_word } = require('../../config.json');
 const fs = require('fs');
 
 module.exports = class Create extends Command {
@@ -10,105 +11,221 @@ module.exports = class Create extends Command {
             group: 'rpg',
             memberName: 'create',
             aliases: ['c'],
-            description: 'Creates an rpg character and save its stats/inventory',
+            guildOnly: true,
+            description:
+                'Creates an rpg character and save its stats/inventory, ' +
+                'the word \`empty\` can be used to indicate that the stat isn\'t used (it can still be be edited afterwards)',
             usage: '[name] [stats] {inventory}',
             args: [
                 {
                     key: 'name',
-                    prompt: 'What\'s the name of the character?',
+                    prompt: 'What\'s the name of your character?',
                     type: 'string',
                     wait: 90,
-                    validate: function(name) {
-                        return name.length > 3;
-                    }
+                    validate: name => name.length > 0
                 },
                 {
                     key: 'image',
-                    prompt: 'What\s the profile image you want for your character? (send \`empty\` for no image)',
+                    prompt: 'What\s the profile image you want for your character?',
                     type: 'string',
                     wait: 300,
                     error: 'Image not found, please try again',
+                    validate: image => image.match(/\.(jpeg|jpg|gif|png)$/) || image === null_word
+                },
+                {
+                    key: 'levels',
+                    prompt: 'How many levels does your character have?',
+                    type: 'string',
+                    wait: 90,
+                    validate: levels => levels > 0 || levels === null_word
+                },
+                {
+                    key: 'age',
+                    prompt: 'What\'s the age of your character?',
+                    type: 'string',
+                    wait: 90,
+                    validate: age => age > 0 || age === null_word
+                },
+                {
+                    key: 'job',
+                    prompt: 'What\'s the job of your character?',
+                    type: 'string',
+                    wait: 90,
+                    validate: job => job.length > 0 || job === null_word
+                },
+                {
+                    key: 'race',
+                    prompt: 'What\'s the race of your character?',
+                    type: 'string',
+                    wait: 90,
+                    validate: race => race.length > 0 || race === null_word
                 },
                 {
                     key: 'HP',
-                    prompt: 'How much HP does the character have?',
-                    type: 'integer',
+                    prompt: 'How much HP does your character have?',
+                    type: 'string',
                     wait: 90,
-                    validate: function(hp) {
-                        return hp > 0;
-                    }
+                    validate: HP => HP > 0 || HP === null_word
                 },
                 {
                     key: 'MP',
-                    prompt: 'How much MP does the character have?',
-                    type: 'integer',
+                    prompt: 'How much MP does your character have?',
+                    type: 'string',
                     wait: 90,
-                    validate: function(mp) {
-                        return mp > 0;
-                    }
+                    validate: MP => MP > 0 || MP === null_word
+                },
+                {
+                    key: 'initiative',
+                    prompt: 'How much initiative does your character have?',
+                    type: 'string',
+                    wait: 90,
+                    validate: initiative => initiative > 0 || initiative === null_word
+                },
+                {
+                    key: 'attack',
+                    prompt: 'How much attack does your character have?',
+                    type: 'string',
+                    wait: 90,
+                    validate: attack => attack > 0 || attack === null_word
+                },
+                {
+                    key: 'defense',
+                    prompt: 'How much defense does your character have?',
+                    type: 'string',
+                    wait: 90,
+                    validate: defense => defense > 0 || defense === null_word
                 },
                 {
                     key: 'stats_names',
-                    prompt: 'What are the names of the stats?',
+                    prompt: 'What are the names of the stats of your character?',
                     type: 'string',
                     wait: 300,
-                    validate: function (stats_names) {
-                        return stats_names.split(' ').length > 0;
-                    }
+                    validate: stats_names => stats_names.split(' ').length > 0 || stats_names === null_word
                 },
                 {
                     key: 'stats',
-                    prompt: 'What are the values of the stats?',
+                    prompt: 'What are the values of the stats of your character?',
                     type: 'string',
                     wait: 300,
-                    validate: function (stats) {
-                        return stats.length > 0;
-                    }
+                    validate: stats => stats.length > 0 || stats === null_word
+                },
+                {
+                    key: 'traits',
+                    prompt: 'What are the traits of your character?',
+                    type: 'string',
+                    wait: 300,
+                    validate: stats_names => stats_names.split(' ').length > 0 || stats_names === null_word
                 },
                 {
                     key: 'inventory',
-                    prompt: 'What does the character own? (send \`empty\` for no inventory)',
+                    prompt: 'What does your character own?',
                     type: 'string',
-                    wait: 300
-                }]
+                    wait: 300,
+                    validate: inventory => inventory.length > 0 || inventory === null_word
+                },
+                {
+                    key: 'skills',
+                    prompt: 'What are the skills of you character?',
+                    type: 'string',
+                    wait: 300,
+                    validate: skills => skills.length > 0 || skills === null_word
+                },
+                {
+                    key: 'spells',
+                    prompt: 'What are the spells of you character?',
+                    type: 'string',
+                    wait: 300,
+                    validate: spells => spells.length > 0 || spells === null_word
+                }
+            ]
         });
     }
 
     async run(message,
-              { name,HP, MP, image, stats_names, stats, inventory }) {
+              { name,image, levels, age, job, race, HP, MP, initiative, attack, defense,
+                  traits, stats_names, stats, inventory, skills, spells }) {
+
         if (stats_names.split(' ').length !== stats.split(' ').length) {
-            message.reply("there isn't the same number of stats and values!").then();
+            message.reply('There isn\'t the same number of stats and values!').then();
+            return;
+        }
+        else if (stats_names === null_word && stats !== null_word) {
+            message.reply(`The stats names are marked as ${null_word} but not the stats`).then();
+            return;
+        }
+        else if (stats_names !== null_word && stats === null_word) {
+            message.reply(`The stats are marked as ${null_word} but not the stats names`).then();
             return;
         }
 
-        let character = new MessageEmbed()
-            .setColor("RANDOM")
-            .setAuthor(`Name: ${name}      HP: ${HP}      MP: ${MP}`)
-            .setTitle('Stats :');
-
-        if (image !== 'empty')
-            character.setThumbnail(image);
-
         let obj = {
             'name': name,
+            'image': image,
             'HP': HP,
             'MP': MP,
+            'levels': levels,
+            'age': age,
+            'job': job,
+            'race': race,
+            'initiative': initiative,
+            'attack': attack,
+            'defense': defense,
+            'traits': [],
             'stats': [],
-            'inventory': []
+            'inventory': [],
+            'skills': [],
+            'spells': []
         };
 
-        const s_names = stats_names.split(' ');
-        const stats_values = stats.split(' ');
+        const space_separator = '      ';
+        let title = `Name: ${name}`;
+        if (HP !== null_word)
+            title += `${space_separator}HP: ${HP}`
+        if (MP !== null_word)
+            title += `${space_separator}MP: ${MP}`
+        if (initiative !== null_word)
+            title += `${space_separator}initiative: ${initiative}`
+        if (attack !== null_word)
+            title += `${space_separator}attack: ${attack}`
+        if (defense !== null_word)
+            title += `${space_separator}defense: ${defense}`
+        if (levels !== null_word)
+            title += `${space_separator}levels: ${levels}`
+        if (job !== null_word)
+            title += `${space_separator}job: ${job}`
+        if (race !== null_word)
+            title += `${space_separator}race: ${race}`
 
-        for (let i = 0; i < s_names.length; i++) {
-            let o = {};
-            o[s_names[i]] = stats_values[i];
-            obj.stats.push(o);
+        let character = new MessageEmbed()
+            .setColor("RANDOM")
+            .setTitle(title);
 
-            character.addField(`${s_names[i]} :      `, stats_values[i], true)
+        if (image !== null_word)
+            character.setThumbnail(image);
+
+        if (traits !== null_word) {
+            character.addField('Traits:', traits.join('\n'));
+
+            obj.traits = traits;
         }
 
-        if (inventory !== 'empty') {
+        if (stats !== null_word) {
+            character.addField('\u200B', '\u200B');
+            character.addField('Stats:', '\u200B');
+
+            const s_names = stats_names.split(' ');
+            const stats_values = stats.split(' ');
+
+            for (let i = 0; i < s_names.length; i++) {
+                let o = {};
+                o[s_names[i]] = stats_values[i];
+                obj.stats.push(o);
+
+                character.addField(`${s_names[i]} :      `, stats_values[i], true)
+            }
+        }
+
+        if (inventory !== null_word) {
             character.addField('\u200B', '\u200B', false);
             character.addField('Inventory :', '\u200B', false);
 
@@ -121,6 +238,20 @@ module.exports = class Create extends Command {
 
                 character.addField(`${object[0]} :      `, o[object[0]], true)
             }
+        }
+
+        if (skills !== null_word) {
+            character.addField('\u200B', '\u200B');
+            character.addField('Skills:', skills.join('\n'));
+
+            obj.skills = skills;
+        }
+
+        if (spells !== null_word) {
+            character.addField('\u200B', '\u200B');
+            character.addField('Spells:', spells.join('\n'));
+
+            obj.spells = spells;
         }
 
         if (!fs.access(`./characters/${message.guild.name}`, (err => console.log(err))))

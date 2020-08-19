@@ -9,14 +9,12 @@ module.exports = class ReloadCommand extends Command {
             group: 'other',
             memberName: 'restart',
             description: 'reload a command or the entire bot, OWNER ONLY',
+            ownerOnly: true,
             usage: '[command name]',
         });
     }
 
     run(message, args) {
-        if (message.author.id !== author_id)
-            return message.reply("Action unauthorised")
-
         if (!args.length) {
             console.log('Restarting...')
             return message.channel.send(`Restarting...`)
@@ -24,7 +22,6 @@ module.exports = class ReloadCommand extends Command {
                 .then(() => message.client.login(token))
                 .then(() => message.channel.send(`Restarted!`))
                 .then(() => console.log('Restarted!'));
-
         }
 
         const commandName = args[0].toLowerCase();

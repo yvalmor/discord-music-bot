@@ -204,7 +204,12 @@ module.exports = class Create extends Command {
             character.setThumbnail(image);
 
         if (traits !== null_word) {
-            character.addField('Traits:', traits.join('\n'));
+            let trait = '';
+            for (let i = 0; i < traits.length - 1; i++)
+                trait += `${traits[i]}\n`;
+            if (traits.length > 0)
+                trait += `${traits[traits.length - 1]}`;
+            character.addField('Traits:', trait);
 
             obj.traits = traits;
         }
@@ -221,7 +226,7 @@ module.exports = class Create extends Command {
                 o[s_names[i]] = stats_values[i];
                 obj.stats.push(o);
 
-                character.addField(`${s_names[i]} :      `, stats_values[i], true)
+                character.addField(`${s_names[i]} :`, stats_values[i], true)
             }
         }
 
@@ -236,20 +241,30 @@ module.exports = class Create extends Command {
                 o[object[0]] = object.length === 1 ? 1 : object[1];
                 obj.inventory.push(o)
 
-                character.addField(`${object[0]} :      `, o[object[0]], true)
+                character.addField(`${object[0]} :`, o[object[0]], true)
             }
         }
 
         if (skills !== null_word) {
             character.addField('\u200B', '\u200B');
-            character.addField('Skills:', skills.join('\n'));
+            let skill = '';
+            for (let i = 0; i < skills.length - 1; i++)
+                skill += `${skills[i]}\n`;
+            if (skills.length > 0)
+                skill += `${skills[skills.length - 1]}`;
+            character.addField('Skills:', skill);
 
             obj.skills = skills;
         }
 
         if (spells !== null_word) {
             character.addField('\u200B', '\u200B');
-            character.addField('Spells:', spells.join('\n'));
+            let spell = '';
+            for (let i = 0; i < spells.length - 1; i++)
+                spell += `${spells[i]}\n`;
+            if (spells.length > 0)
+                spell += `${spells[spells.length - 1]}`;
+            character.addField('Spells:', spell);
 
             obj.spells = spells;
         }

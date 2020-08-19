@@ -24,24 +24,10 @@ module.exports = class Create extends Command {
                 },
                 {
                     key: 'image',
-                    prompt: 'What\s the profile image you want for your character? (send \'empty\' for no image)',
+                    prompt: 'What\s the profile image you want for your character? (send \`empty\` for no image)',
                     type: 'string',
                     wait: 300,
                     error: 'Image not found, please try again',
-                    validate: function(image){
-                        if (image === 'empty')
-                            return true;
-
-                        let request;
-                        if (window.XMLHttpRequest)
-                            request = new XMLHttpRequest();
-                        else
-                            request = new ActiveXObject('Microsoft.XMLHTTP');
-                        request.open('GET', image, false);
-                        request.send()
-
-                        return request.status !== 404
-                    }
                 },
                 {
                     key: 'HP',
@@ -81,7 +67,7 @@ module.exports = class Create extends Command {
                 },
                 {
                     key: 'inventory',
-                    prompt: 'What does the character own?',
+                    prompt: 'What does the character own? (send \`empty\` for no inventory)',
                     type: 'string',
                     wait: 300
                 }]
@@ -96,8 +82,8 @@ module.exports = class Create extends Command {
         }
 
         let character = new MessageEmbed()
-            .setColor('#ff0000')
-            .setAuthor(`Name: ${name}\t HP: ${HP}\t MP: ${MP}`)
+            .setColor("RANDOM")
+            .setAuthor(`Name: ${name}      HP: ${HP}      MP: ${MP}`)
             .setTitle('Stats :');
 
         if (image !== 'empty')
@@ -119,26 +105,28 @@ module.exports = class Create extends Command {
             o[s_names[i]] = stats_values[i];
             obj.stats.push(o);
 
-            character.addField(`${s_names[i]} :`, stats_values[i], true)
+            character.addField(`${s_names[i]} :      `, stats_values[i], true)
         }
 
-        character.addField('\u200B', '\u200B', false);
-        character.addField('Inventory :', '\u200B', false);
+        if (inventory !== 'empty') {
+            character.addField('\u200B', '\u200B', false);
+            character.addField('Inventory :', '\u200B', false);
 
-        const inventory_obj = inventory.split(', ');
-        for (let i = 0; i < inventory_obj.length; i++) {
-            const object = inventory_obj[i].split(': ');
-            let o = {};
-            o[object[0]] = object.length === 1 ? 1 : object[1];
-            obj.inventory.push(o)
+            const inventory_obj = inventory.split(', ');
+            for (let i = 0; i < inventory_obj.length; i++) {
+                const object = inventory_obj[i].split(': ');
+                let o = {};
+                o[object[0]] = object.length === 1 ? 1 : object[1];
+                obj.inventory.push(o)
 
-            character.addField(`${object[0]} :`, o[object[0]], true)
+                character.addField(`${object[0]} :      `, o[object[0]], true)
+            }
         }
 
-        if (!fs.access(`../../characters/${message.guild.name}`, (err => console.log(err))))
-            await fs.mkdir(`../../characters/${message.guild.name}`, true, (err => console.log(err)))
+        if (!fs.access(`./characters/${message.guild.name}`, (err => console.log(err))))
+           await fs.mkdir(`./characters/${message.guild.name}`, true, (err => console.log(err)))
 
-        const path = `../../characters/${message.guild.name}/${name}`;
+        const path = `./characters/${message.guild.name}/${name}.json`;
 
         fs.writeFile(path, JSON.stringify(obj), (err) => {
             if (err) console.error(err);

@@ -21,7 +21,7 @@ module.exports = class Delete extends Command {
     }
 
     async run(message, { name }) {
-        const path = `../../characters/${message.guild.name}/${name}`;
+        const path = `../../characters/${message.guild.name}/${name}.json`;
         if (fs.exists(path, (err => {
             console.log(err);
         })))

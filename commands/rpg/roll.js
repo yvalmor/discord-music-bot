@@ -8,7 +8,7 @@ module.exports = class ReloadCommand extends Command {
     constructor(client){
         super(client, {
             name: 'roll',
-            group: 'dice',
+            group: 'rpg',
             memberName: 'roll',
             aliases: ['dice'],
             description: 'roll a dice with a specified number of faces',

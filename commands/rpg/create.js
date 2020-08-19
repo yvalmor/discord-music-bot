@@ -177,24 +177,23 @@ module.exports = class Create extends Command {
             'spells': []
         };
 
+        let separate = true;
         const space_separator = '      ';
         let title = `Name: ${name}`;
-        if (HP !== null_word)
-            title += `${space_separator}HP: ${HP}`
-        if (MP !== null_word)
-            title += `${space_separator}MP: ${MP}`
-        if (initiative !== null_word)
-            title += `${space_separator}initiative: ${initiative}`
-        if (attack !== null_word)
-            title += `${space_separator}attack: ${attack}`
-        if (defense !== null_word)
-            title += `${space_separator}defense: ${defense}`
-        if (levels !== null_word)
-            title += `${space_separator}levels: ${levels}`
-        if (job !== null_word)
-            title += `${space_separator}job: ${job}`
-        if (race !== null_word)
-            title += `${space_separator}race: ${race}`
+        if (job !== null_word) {
+            title += `${space_separator}${job}`
+            separate = false;
+        }
+        if (race !== null_word) {
+            title += `${separate ? space_separator : ' '}${race}`
+            separate = false;
+        }
+        if (levels !== null_word) {
+            title += `${separate ? space_separator : ' '}lv${levels}`
+            separate = false;
+        }
+        if (age !== null_word)
+            title += `${separate ? space_separator : ', '}${age} years`
 
         let character = new MessageEmbed()
             .setColor("RANDOM")
@@ -202,6 +201,18 @@ module.exports = class Create extends Command {
 
         if (image !== null_word)
             character.setThumbnail(image);
+
+        if (HP !== null_word)
+            character.addField('HP: ', HP, MP !== null_word);
+        if (MP !== null_word)
+            character.addField('MP: ', MP, false);
+
+        if (initiative !== null_word)
+            character.addField('initiative: ', initiative, attack !== null_word || defense !== null_word);
+        if (attack !== null_word)
+            character.addField('attack: ', attack, defense !== null_word);
+        if (defense !== null_word)
+            character.addField('defense: ', defense, false);
 
         if (traits !== null_word) {
             let trait = '';

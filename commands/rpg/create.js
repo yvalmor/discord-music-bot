@@ -96,6 +96,12 @@ module.exports = class Create extends Command {
                     validate: defense => defense > 0 || defense === null_word
                 },
                 {
+                    key: 'money',
+                    prompt: 'How much money does your character have?',
+                    type: 'string',
+                    wait: 90,
+                },
+                {
                     key: 'stats_names',
                     prompt: 'What are the names of the stats of your character?',
                     type: 'string',
@@ -141,9 +147,11 @@ module.exports = class Create extends Command {
         });
     }
 
-    async run(message,
-              { name,image, levels, age, job, race, HP, MP, initiative, attack, defense,
-                  traits, stats_names, stats, inventory, skills, spells }) {
+    async run(message, {
+                  name,image,
+                  levels, age, job, race, HP, MP, initiative, attack, defense, money,
+                  traits, stats_names, stats, inventory, skills, spells
+    }) {
 
         if (stats_names.split(' ').length !== stats.split(' ').length) {
             message.reply('There isn\'t the same number of stats and values!').then();
@@ -203,28 +211,63 @@ module.exports = class Create extends Command {
             character.setThumbnail(image);
 
         if (HP !== null_word)
-            character.addField('HP: ', HP, MP !== null_word);
+            character.addField('HP: ', HP, true);
         if (MP !== null_word)
-            character.addField('MP: ', MP, false);
+            character.addField('MP: ', MP, true);
 
         if (initiative !== null_word)
-            character.addField('initiative: ', initiative, attack !== null_word || defense !== null_word);
+            character.addField('initiative: ', initiative, true);
         if (attack !== null_word)
-            character.addField('attack: ', attack, defense !== null_word);
+            character.addField('attack: ', attack, true);
         if (defense !== null_word)
-            character.addField('defense: ', defense, false);
+            character.addField('defense: ', defense, true);
+        if (defense !== null_word)
+            character.addField('defense: ', defense, true);
+        if (money !== null_word)
+            character.addField('money: ', money, true);
 
         if (traits !== null_word) {
+            character.addField('\u200B', '\u200B');
+
             traits = traits.split(' ');
             let trait = '';
             for (let i = 0; i < traits.length - 1; i++)
                 trait += `${traits[i]}\n`;
             if (traits.length > 0)
                 trait += `${traits[traits.length - 1]}`;
-            character.addField('Traits:', trait);
-
-            obj.traits = traits;
+            character.addField('Traits:', trait, true);
         }
+        obj.traits = traits;
+
+        if (skills !== null_word) {
+            skills = skills.split(' ');
+
+            if (traits === null_word)
+                character.addField('\u200B', '\u200B');
+
+            let skill = '';
+            for (let i = 0; i < skills.length - 1; i++)
+                skill += `${skills[i]}\n`;
+            if (skills.length > 0)
+                skill += `${skills[skills.length - 1]}`;
+            character.addField('Skills:', skill, true);
+        }
+        obj.skills = skills;
+
+        if (spells !== null_word) {
+            spells = spells.split(' ');
+
+            if (traits === null_word && skills === null_word)
+                character.addField('\u200B', '\u200B');
+
+            let spell = '';
+            for (let i = 0; i < spells.length - 1; i++)
+                spell += `${spells[i]}\n`;
+            if (spells.length > 0)
+                spell += `${spells[spells.length - 1]}`;
+            character.addField('Spells:', spell, true);
+        }
+        obj.spells = spells;
 
         if (stats !== null_word) {
             character.addField('\u200B', '\u200B');
@@ -240,7 +283,7 @@ module.exports = class Create extends Command {
 
                 character.addField(`${s_names[i]} :`, stats_values[i], true)
             }
-        }
+        } else obj.stats = null_word;
 
         if (inventory !== null_word) {
             character.addField('\u200B', '\u200B', false);
@@ -255,40 +298,15 @@ module.exports = class Create extends Command {
 
                 character.addField(`${object[0]} :`, o[object[0]], true)
             }
-        }
+        } else obj.inventory = null_word;
 
-        if (skills !== null_word) {
-            skills = skills.split(' ');
-
-            character.addField('\u200B', '\u200B');
-            let skill = '';
-            for (let i = 0; i < skills.length - 1; i++)
-                skill += `${skills[i]}\n`;
-            if (skills.length > 0)
-                skill += `${skills[skills.length - 1]}`;
-            character.addField('Skills:', skill);
-
-            obj.skills = skills;
-        }
-
-        if (spells !== null_word) {
-            spells = spells.split(' ');
-
-            character.addField('\u200B', '\u200B');
-            let spell = '';
-            for (let i = 0; i < spells.length - 1; i++)
-                spell += `${spells[i]}\n`;
-            if (spells.length > 0)
-                spell += `${spells[spells.length - 1]}`;
-            character.addField('Spells:', spell);
-
-            obj.spells = spells;
-        }
-
-        if (!fs.access(`./characters/${message.guild.name}`, (err => console.log(err))))
-           await fs.mkdir(`./characters/${message.guild.name}`, true, (err => console.log(err)))
+        if (! await fs.access(`./characters/${message.guild.name}`, (err => console.log(err))))
+           await fs.mkdir(`./characters/${message.guild.name}`, true, (err => console.log(err)));
 
         const path = `./characters/${message.guild.name}/${name}.json`;
+
+        if (await fs.access(`./characters/${message.guild.name}/${name}.json`, (err => console.log(err))))
+            await fs.unlink(`./characters/${message.guild.name}/${name}.json`, (err => console.log(err)));
 
         fs.writeFile(path, JSON.stringify(obj), (err) => {
             if (err) console.error(err);

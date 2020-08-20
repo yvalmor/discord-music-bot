@@ -3,17 +3,16 @@ const { Command } = require('discord.js-commando');
 const { null_word } = require('../../config.json');
 const fs = require('fs');
 
-module.exports = class Create extends Command {
+module.exports = class Replace extends Command {
 
     constructor(client){
         super(client, {
-            name: 'create',
+            name: 'replace',
             group: 'rpg',
-            memberName: 'create',
-            aliases: ['c'],
+            memberName: 'replace',
             guildOnly: true,
             description:
-                'Creates an rpg character and save its stats/inventory, ' +
+                'Replaces an rpg character and save its stats/inventory, ' +
                 'the word \`empty\` can be used to indicate that the stat isn\'t used (it can still be be edited afterwards)',
             usage: '[name] [stats] {inventory}',
             args: [
@@ -148,17 +147,10 @@ module.exports = class Create extends Command {
     }
 
     async run(message, {
-                  name,image,
-                  levels, age, job, race, HP, MP, initiative, attack, defense, money,
-                  traits, stats_names, stats, inventory, skills, spells
+        name,image,
+        levels, age, job, race, HP, MP, initiative, attack, defense, money,
+        traits, stats_names, stats, inventory, skills, spells
     }) {
-        const path = `${process.cwd()}/characters/${message.guild.name}/${name}.json`;
-
-        if (fs.accessSync(path)){
-            message.reply('This character already exists! To replace it, use replace command').then();
-            return;
-        }
-
         if (stats_names.split(' ').length !== stats.split(' ').length) {
             message.reply('There isn\'t the same number of stats and values!').then();
             return;
@@ -308,7 +300,12 @@ module.exports = class Create extends Command {
         } else obj.inventory = null_word;
 
         if (!fs.accessSync(`${process.cwd()}/characters/${message.guild.name}`))
-           await fs.mkdir(`${process.cwd()}/characters/${message.guild.name}`, (err => console.log(err)));
+            await fs.mkdir(`${process.cwd()}/characters/${message.guild.name}`, (err => console.log(err)));
+
+        const path = `${process.cwd()}/characters/${message.guild.name}/${name}.json`;
+
+        if (fs.accessSync(path))
+            fs.unlinkSync(path);
 
         fs.writeFile(path, JSON.stringify(obj), (err) => {
             if (err) console.error(err);

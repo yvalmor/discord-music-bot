@@ -18,11 +18,6 @@ module.exports = class List extends Command {
 
     async run(message, { name }) {
         const path = `${process.cwd()}/characters/${message.guild.name}`;
-        if (!fs.accessSync(path))
-        {
-            message.reply('There isn\'t any character yet!').then();
-            return;
-        }
 
         const characterFiles = fs.readdirSync(path).filter(file => file.endsWith('.json'));
 

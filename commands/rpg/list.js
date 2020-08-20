@@ -55,7 +55,7 @@ module.exports = class List extends Command {
             if (age !== null_word)
                 content += `${separate ? space_separator : ', '}${age} years`
 
-            characters.addField(name, content);
+            characters.addField(name, content === '' ? '\u200B' : content);
             console.log(content);
         }
         await message.channel.send(characters);

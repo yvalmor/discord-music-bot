@@ -39,7 +39,7 @@ module.exports = class List extends Command {
         for (const file of characterFiles) {
             const {
                 name, levels, age, job, race
-            } = require(`../.${path}/${file}`);
+            } = require(`${path}/${file}`);
 
             let separate = true;
             const space_separator = '      ';

@@ -13,8 +13,8 @@ const edit_details =
     'For characteristics like traits, skills or spells there are 4 possibilities:\n' +
     '    1. You want to overwrite the characteristic: you must enter the new value this way: `[name1, name2, name3, ...]\`' +
     '    2. You want to remove the field: you must enter \`empty\`\n' +
-    '    3. You want to add/replace a value in the characteristic: you must enter the value this way: \`name\`\n' +
-    '    4. You want to add/replace multiple values in the characteristic: you must enter the values this way: \`name1, name2, ...\`';
+    '    3. You want to add a value in the characteristic: you must enter the value this way: \`name\`\n' +
+    '    4. You want to add multiple values in the characteristic: you must enter the values this way: \`name1, name2, ...\`';
 
 module.exports = class See extends Command {
     constructor(client) {
@@ -86,54 +86,71 @@ module.exports = class See extends Command {
         switch (stat_name) {
             case 'name':
                 obj.name = value;
+                name = value;
                 break;
             case 'image':
                 obj.image = value;
+                image = value;
                 break;
             case 'levels':
                 obj.levels = value;
+                levels = value;
                 break;
             case 'age':
                 obj.age = value;
+                age = value;
                 break;
             case 'job':
                 obj.job = value;
+                job = value;
                 break;
             case 'race':
                 obj.race = value;
+                race = value;
                 break;
             case 'HP':
                 obj.HP = value;
+                HP = value;
                 break;
             case 'MP':
                 obj.MP = value;
+                MP = value;
                 break;
             case 'initiative':
                 obj.initiative = value;
+                initiative = value;
                 break;
             case 'attack':
                 obj.attack = value;
+                attack = value;
                 break;
             case 'defense':
                 obj.defense = value;
+                defense = value;
                 break;
             case 'money':
                 obj.money = value;
+                money = value;
                 break;
             case 'inventory':
                 obj.inventory = this.dict_modification(inventory, value);
+                inventory = obj.inventory;
                 break;
             case 'stats':
                 obj.stats = this.dict_modification(stats, value);
+                stats = obj.stats;
                 break;
             case 'traits':
                 obj.traits = this.array_modification(traits, value);
+                traits = obj.traits;
                 break;
             case 'skills':
                 obj.skills = this.array_modification(skills, value);
+                skills = obj.skills;
                 break;
             case 'spells':
                 obj.spells = this.array_modification(spells, value);
+                spells = obj.spells;
                 break;
         }
 
@@ -231,11 +248,11 @@ module.exports = class See extends Command {
             if (err) console.log(err)
         }));
 
-        fs.writeFile(path, JSON.stringify(obj), (err) => {
+        await message.channel.send({ embed: character });
+
+        await fs.writeFile(path, JSON.stringify(obj), (err) => {
             if (err) console.error(err);
         });
-
-        await message.channel.send({ embed: character });
     }
 
     dict_modification(array, string){
@@ -244,7 +261,7 @@ module.exports = class See extends Command {
 
         if (string[0] === '[' && string[string.length - 1] === ']'){
             let new_array = [];
-            string = string.sub(1, string.length - 1);
+            string = string.substring(1, string.length - 1);
             for (const value of string.split(', ')){
                 const val = value.split(': ');
                 let o = {}
@@ -285,7 +302,7 @@ module.exports = class See extends Command {
 
         if (string[0] === '[' && string[string.length - 1] === ']'){
             let new_array = [];
-            string = string.sub(1, string.length - 1);
+            string = string.substring(1, string.length - 1);
 
             for (const value of string.split(', '))
                 new_array.push(value);

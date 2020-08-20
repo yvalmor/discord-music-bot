@@ -52,10 +52,6 @@ client.registry
     })
     .registerCommandsIn(path.join(__dirname, 'commands'));
 
-if (!fs.accessSync(`${process.cwd()}/characters/`))
-    fs.mkdirSync(`${process.cwd()}/characters/`)
-
-
     /* client.commands = new Discord.Collection();
 
     const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));

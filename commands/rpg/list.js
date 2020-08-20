@@ -18,7 +18,7 @@ module.exports = class List extends Command {
 
     async run(message, { name }) {
         const path = `${process.cwd()}/characters/${message.guild.name}`;
-        if (await fs.access(path, (err => console.log(err))))
+        if (!fs.accessSync(path))
         {
             message.reply('There isn\'t any character yet!').then();
             return;

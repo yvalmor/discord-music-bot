@@ -301,8 +301,8 @@ module.exports = class Create extends Command {
             }
         } else obj.inventory = null_word;
 
-        if (! await fs.access(`./characters/${message.guild.name}`, (err => console.log(err))))
-           await fs.mkdir(`./characters/${message.guild.name}`, true, (err => console.log(err)));
+        if (!fs.accessSync(`./characters/${message.guild.name}`))
+           await fs.mkdir(`./characters/${message.guild.name}`, (err => console.log(err)));
 
         const path = `${process.cwd()}/characters/${message.guild.name}/${name}.json`;
 

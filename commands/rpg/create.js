@@ -175,6 +175,7 @@ module.exports = class Create extends Command {
             'age': age,
             'job': job,
             'race': race,
+            'money': money,
             'initiative': initiative,
             'attack': attack,
             'defense': defense,

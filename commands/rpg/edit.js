@@ -52,7 +52,7 @@ module.exports = class See extends Command {
     }
 
     async run(message, { character_name, stat_name, value }) {
-        const path = `./characters/${message.guild.name}/${character_name}.json`;
+        const path = `${process.cwd()}/characters/${message.guild.name}/${character_name}.json`;
         if (! fs.existsSync(path)) {
             message.reply('This character doesn\'t exists!').then();
             return;
@@ -60,7 +60,7 @@ module.exports = class See extends Command {
 
         let {
             name, image, levels, age, job, race, HP, MP, initiative, attack, defense, money, traits, stats, inventory, skills, spells
-        } = require(`../.${path}`);
+        } = require(path);
 
         let obj = {
             'name': name,
@@ -244,13 +244,13 @@ module.exports = class See extends Command {
             }
         }
 
-        await fs.unlink(`./characters/${message.guild.name}/${character_name}.json`, (err => {
+        await fs.unlink(path, (err => {
             if (err) console.log(err)
         }));
 
         await message.channel.send({ embed: character });
 
-        await fs.writeFile(`./characters/${message.guild.name}/${name}.json`, JSON.stringify(obj), (err) => {
+        await fs.writeFile(`${process.cwd()}/characters/${message.guild.name}/${name}.json`, JSON.stringify(obj), (err) => {
             if (err) console.error(err);
         });
     }

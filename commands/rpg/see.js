@@ -25,7 +25,7 @@ module.exports = class See extends Command {
     }
 
     async run(message, { character_name }) {
-        const path = `./characters/${message.guild.name}/${character_name}.json`;
+        const path = `${process.cwd()}/characters/${message.guild.name}/${character_name}.json`;
         if (! fs.existsSync(path)) {
             message.reply('This character doesn\'t exists!').then();
             return;

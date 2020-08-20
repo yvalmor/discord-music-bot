@@ -304,10 +304,10 @@ module.exports = class Create extends Command {
         if (! await fs.access(`./characters/${message.guild.name}`, (err => console.log(err))))
            await fs.mkdir(`./characters/${message.guild.name}`, true, (err => console.log(err)));
 
-        const path = `./characters/${message.guild.name}/${name}.json`;
+        const path = `${process.cwd()}/characters/${message.guild.name}/${name}.json`;
 
-        if (await fs.access(`./characters/${message.guild.name}/${name}.json`, (err => console.log(err))))
-            await fs.unlink(`./characters/${message.guild.name}/${name}.json`, (err => console.log(err)));
+        if (await fs.access(path, (err => console.log(err))))
+            await fs.unlink(path, (err => console.log(err)));
 
         fs.writeFile(path, JSON.stringify(obj), (err) => {
             if (err) console.error(err);

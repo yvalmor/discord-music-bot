@@ -33,7 +33,7 @@ module.exports = class See extends Command {
 
         const {
             name, image, levels, age, job, race, HP, MP, initiative, attack, defense, money, traits, stats, inventory, skills, spells
-        } = require(`../.${path}`);
+        } = require(path);
 
         let separate = true;
         const space_separator = '      ';

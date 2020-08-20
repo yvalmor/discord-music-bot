@@ -38,7 +38,7 @@ module.exports = class See extends Command {
                     prompt: 'What\s the name of the characteristic you want to edit?',
                     type: 'string',
                     wait: 90,
-                    oneOf: characteristics
+                    validate: stat_name => characteristics.indexOf(stat_name) !== -1
                 },
                 {
                     key: 'value',
@@ -244,13 +244,13 @@ module.exports = class See extends Command {
             }
         }
 
-        await fs.unlink(`./characters/${message.guild.name}/${name}.json`, (err => {
+        await fs.unlink(`./characters/${message.guild.name}/${character_name}.json`, (err => {
             if (err) console.log(err)
         }));
 
         await message.channel.send({ embed: character });
 
-        await fs.writeFile(path, JSON.stringify(obj), (err) => {
+        await fs.writeFile(`./characters/${message.guild.name}/${name}.json`, JSON.stringify(obj), (err) => {
             if (err) console.error(err);
         });
     }

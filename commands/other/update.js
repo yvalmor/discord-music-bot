@@ -8,6 +8,7 @@ module.exports = class Update extends Command {
             name: 'update',
             group: 'other',
             memberName: 'update',
+            description: 'Sends an update',
             hidden: true,
         });
     }

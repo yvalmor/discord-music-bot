@@ -26,6 +26,8 @@ module.exports = class Update extends Command {
                 { name: 'MacOS:', text: `${url}/releases/latest/download/Spell_manager.-.windows.exe`},
             );
 
+        message.reply('Sending update!').then();
+
         const channel = this.client.channels.cache.get('746280899951198249').send(update);
     }
 }

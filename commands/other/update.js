@@ -21,17 +21,16 @@ module.exports = class Update extends Command {
             .setDescription('A new version of the Spell Manager has been released!')
             .setAuthor('Yvon', message.author.avatarURL(), url)
             .setColor('#0000ff')
-            .addFields(
-                { name: 'MacOS:',
-                    text: '[Spell_manager-mac.zip](https://github.com/yvalmor/SpellManager/releases/latest/download/Spell_manager-mac.zip)'},
-                { name: 'Linux:',
-                    text: '[Spell_manager-linux.tar.gz](https://github.com/yvalmor/SpellManager/releases/latest/download/Spell_manager-linux.tar.gz)'},
-                { name: 'MacOS:',
-                    text: '[Spell_manager-windows.exe](https://github.com/yvalmor/SpellManager/releases/latest/download/Spell_manager.-.windows.exe)'},
-            );
+            .addField('MacOS:',
+                'link: [Spell_manager-mac.zip](https://github.com/yvalmor/SpellManager/releases/latest/download/Spell_manager-mac.zip)')
+            .addField('Linux:',
+                'link: [Spell_manager-linux.tar.gz](https://github.com/yvalmor/SpellManager/releases/latest/download/Spell_manager-linux.tar.gz)')
+            .addField('MacOS:',
+                'link: [Spell_manager-windows.exe](https://github.com/yvalmor/SpellManager/releases/latest/download/Spell_manager.-.windows.exe)');
+
 
         message.reply('Sending update!').then();
 
-        const channel = this.client.channels.cache.get('746280899951198249').send(update);
+        this.client.channels.cache.get('746280899951198249').send(update);
     }
 }

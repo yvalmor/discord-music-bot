@@ -22,9 +22,12 @@ module.exports = class Update extends Command {
             .setAuthor('Yvon', message.author.avatarURL(), url)
             .setColor('#0000ff')
             .addFields(
-                { name: 'MacOS:', text: `[Spell_manager-mac.zip](${url}/releases/latest/download/Spell_manager-mac.zip)`},
-                { name: 'Linux:', text: `[Spell_manager-linux.tar.gz](${url}/releases/latest/download/Spell_manager-linux.tar.gz)`},
-                { name: 'MacOS:', text: `[Spell_manager-windows.exe](${url}/releases/latest/download/Spell_manager.-.windows.exe)`},
+                { name: 'MacOS:',
+                    text: '[Spell_manager-mac.zip](https://github.com/yvalmor/SpellManager/releases/latest/download/Spell_manager-mac.zip)'},
+                { name: 'Linux:',
+                    text: '[Spell_manager-linux.tar.gz](https://github.com/yvalmor/SpellManager/releases/latest/download/Spell_manager-linux.tar.gz)'},
+                { name: 'MacOS:',
+                    text: '[Spell_manager-windows.exe](https://github.com/yvalmor/SpellManager/releases/latest/download/Spell_manager.-.windows.exe)'},
             );
 
         message.reply('Sending update!').then();

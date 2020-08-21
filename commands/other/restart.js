@@ -10,6 +10,7 @@ module.exports = class ReloadCommand extends Command {
             memberName: 'restart',
             description: 'reload a command or the entire bot, OWNER ONLY',
             ownerOnly: true,
+            hidden: true,
             usage: '[command name]',
         });
     }

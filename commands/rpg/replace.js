@@ -218,8 +218,6 @@ module.exports = class Replace extends Command {
             character.addField('attack: ', attack, true);
         if (defense !== null_word)
             character.addField('defense: ', defense, true);
-        if (defense !== null_word)
-            character.addField('defense: ', defense, true);
         if (money !== null_word)
             character.addField('money: ', money, true);
 

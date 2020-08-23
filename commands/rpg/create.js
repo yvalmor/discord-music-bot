@@ -154,9 +154,13 @@ module.exports = class Create extends Command {
     }) {
         const path = `${process.cwd()}/characters/${message.guild.name}/${name}.json`;
 
-        if (fs.accessSync(path)){
-            message.reply('This character already exists! To replace it, use replace command').then();
-            return;
+        try {
+            if (fs.accessSync(path)) {
+                message.reply('This character already exists! To replace it, use replace command').then();
+                return;
+            }
+        } catch (e) {
+            console.error(e);
         }
 
         if (stats_names.split(' ').length !== stats.split(' ').length) {
@@ -307,8 +311,12 @@ module.exports = class Create extends Command {
             }
         } else obj.inventory = null_word;
 
-        if (!fs.accessSync(`${process.cwd()}/characters/${message.guild.name}`))
-           await fs.mkdir(`${process.cwd()}/characters/${message.guild.name}`, (err => console.log(err)));
+        try {
+            fs.accessSync(`${process.cwd()}/characters/${message.guild.name}`)
+        } catch (e) {
+            console.error(e);
+            fs.mkdirSync(`${process.cwd()}/characters/${message.guild.name}`);
+        }
 
         fs.writeFile(path, JSON.stringify(obj), (err) => {
             if (err) console.error(err);

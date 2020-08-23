@@ -23,14 +23,16 @@ module.exports = class Delete extends Command {
 
     async run(message, { name }) {
         const path = `${process.cwd()}/characters/${message.guild.name}/${name}.json`;
-        if (fs.existsSync(path))
+        try
         {
+            if (fs.existsSync(path))
             await fs.unlink(path, (err => {
                 console.log(err);
             }));
             await message.reply('Character deleted!')
-        }
-        else
+        } catch (e) {
+            console.error(e);
             await message.reply('This character doesn\'t exists!');
+        }
     }
 };

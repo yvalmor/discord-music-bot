@@ -50,13 +50,13 @@ module.exports = class ReloadCommand extends Command {
             rnd = Math.floor(Math.random() * faces + 1);
 
             if (rnd == faces) {
-                rollResults.addField(`Roll n°${i + 1}`, `${rnd.toString()}, réussite critique`, true);
+                rollResults.addField(`Roll n°${i + 1}      `, `${rnd.toString()}, réussite critique`, true);
                 nbWin++;
             } else if (rnd == 1) {
-                rollResults.addField(`Roll n°${i + 1}`, `${rnd.toString()}, échec critique`, true);
+                rollResults.addField(`Roll n°${i + 1}      `, `${rnd.toString()}, échec critique`, true);
                 nbFail++;
             } else
-                rollResults.addField(`Roll n°${i + 1}`, `${rnd.toString()}`, true)
+                rollResults.addField(`Roll n°${i + 1}      `, `${rnd.toString()}`, true)
         }
 
         if (nbFail < nbWin) {

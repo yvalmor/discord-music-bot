@@ -154,12 +154,10 @@ module.exports = class Replace extends Command {
         if (stats_names.split(' ').length !== stats.split(' ').length) {
             message.reply('There isn\'t the same number of stats and values!').then();
             return;
-        }
-        else if (stats_names === null_word && stats !== null_word) {
+        } else if (stats_names === null_word && stats !== null_word) {
             message.reply(`The stats names are marked as ${null_word} but not the stats`).then();
             return;
-        }
-        else if (stats_names !== null_word && stats === null_word) {
+        } else if (stats_names !== null_word && stats === null_word) {
             message.reply(`The stats are marked as ${null_word} but not the stats names`).then();
             return;
         }
@@ -299,13 +297,21 @@ module.exports = class Replace extends Command {
             }
         } else obj.inventory = null_word;
 
-        if (!fs.accessSync(`${process.cwd()}/characters/${message.guild.name}`))
-            await fs.mkdir(`${process.cwd()}/characters/${message.guild.name}`, (err => console.log(err)));
+        try {
+            fs.accessSync(`${process.cwd()}/characters/${message.guild.name}`)
+        } catch (e) {
+            console.error(e);
+            fs.mkdir(`${process.cwd()}/characters/${message.guild.name}`, (err => console.log(err)));
+        }
 
         const path = `${process.cwd()}/characters/${message.guild.name}/${name}.json`;
 
-        if (fs.accessSync(path))
-            fs.unlinkSync(path);
+        try {
+            if (fs.accessSync(path))
+                fs.unlinkSync(path);
+        } catch (e) {
+            console.error(e);
+        }
 
         fs.writeFile(path, JSON.stringify(obj), (err) => {
             if (err) console.error(err);

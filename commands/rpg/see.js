@@ -68,6 +68,9 @@ module.exports = class See extends Command {
             .setColor("RANDOM")
             .setTitle(title);
 
+        if (name.replace('_', ' ') === 'Glenn Hyakuya')
+            character.setURL('https://www.youtube.com/watch?v=rp8hvyjZWHs');
+
         if (image !== null_word)
             character.setThumbnail(image);
 

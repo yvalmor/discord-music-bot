@@ -117,10 +117,10 @@
         }
     ],
     "traits": [
-        "savant_fou\\_(+savoir)",
-        "immoral\\_(+mental)",
-        "érudit\\_(+lecture)",
-        "dextérité\\_(+bricolage)",
-        "margoulin\\_(+marchandage)"
+        "savant_fou (+savoir)",
+        "immoral (+mental)",
+        "érudit (+lecture)",
+        "dextérité (+bricolage)",
+        "margoulin (+marchandage)"
     ]
 }

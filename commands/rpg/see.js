@@ -33,7 +33,10 @@ module.exports = class See extends Command {
 
     async run(message, { character_name, stat_name }) {
         const path = `${process.cwd()}/characters/${message.guild.name}/${character_name.replace('_', ' ')}.json`;
-        if (! fs.existsSync(path)) {
+        try {
+            fs.existsSync(path)
+        } catch (e) {
+            console.error(e);
             message.reply('This character doesn\'t exists!').then();
             return;
         }

@@ -115,22 +115,28 @@ module.exports = class See extends Command {
 
         if (stats !== null_word && (stat_name === '' || stat_name === 'stats')) {
             character.addField('\u200B', '\u200B');
-            character.addField('Stats:', '\u200B');
+
+            let stat = '';
 
             for (let s in stats) {
                 const key = Object.keys(stats[s])[0];
-                character.addField(key, stats[s][key], true);
+                stat += `${key}: ${stats[s][key]}\n`;
             }
+
+            character.addField('Stats:', stat);
         }
 
         if (inventory !== null_word && (stat_name === '' || stat_name === 'inventory')) {
             character.addField('\u200B', '\u200B');
-            character.addField('Inventory:', '\u200B');
+
+            let invent = '';
 
             for (let s in inventory) {
                 const key = Object.keys(inventory[s])[0];
-                character.addField(key, inventory[s][key], true);
+                invent += `${key}: ${inventory[s][key]}\n`;
             }
+
+            character.addField('Inventory:', invent);
         }
 
         await message.channel.send({ embed: character });

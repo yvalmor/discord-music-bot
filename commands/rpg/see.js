@@ -123,11 +123,12 @@ module.exports = class See extends Command {
                 stat += `${key}: ${stats[s][key]}\n`;
             }
 
-            character.addField('Stats:', stat);
+            character.addField('Stats:', stat, true);
         }
 
         if (inventory !== null_word && (stat_name === '' || stat_name === 'inventory')) {
-            character.addField('\u200B', '\u200B');
+            if (stats === null_word)
+                character.addField('\u200B', '\u200B');
 
             let invent = '';
 
@@ -136,7 +137,7 @@ module.exports = class See extends Command {
                 invent += `${key}: ${inventory[s][key]}\n`;
             }
 
-            character.addField('Inventory:', invent);
+            character.addField('Inventory:', invent, true);
         }
 
         await message.channel.send({ embed: character });

@@ -227,12 +227,15 @@ module.exports = class See extends Command {
 
         if (stats !== null_word) {
             character.addField('\u200B', '\u200B');
-            character.addField('Stats:', '\u200B');
+
+            let stat = '';
 
             for (let s in stats) {
                 const key = Object.keys(stats[s])[0];
-                character.addField(key, stats[s][key], true);
+                stat += `${key}: ${stats[s][key]}`;
             }
+
+            character.addField('Stats:', stat);
         }
 
         if (inventory !== null_word) {

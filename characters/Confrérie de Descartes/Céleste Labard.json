@@ -1,1 +1,141 @@
-{"name":"Céleste Labard","image":"empty","HP":"9","MP":"empty","levels":"1","age":"2","job":"Herboriste","race":"Humain","money":"0 Or - 4 Arg - 1 Cui","initiative":"2","attack":"6","defense":"4","traits":["-","Visionnaire","(","Confection",")\n-","Psychopathe","(","+","Intelligence",")\n-","Patiente","(","+","Mental",")\n-","Main","verte","(","+","Médecine",")\n-","Indépendante","(","+","Volonté",")"],"stats":[{"bricolage":"11"},{"camouflage":"6"},{"charisme":"2"},{"combat_C/C":"1"},{"combat_A/C":"12"},{"combat_L/C":"12"},{"conduite":"5"},{"confection":"19"},{"cuisine":"9"},{"déguisement":"6"},{"discrétion":"12"},{"écriture":"15"},{"équitation":"8"},{"intelligence":"18"},{"jeu":"9"},{"lecture":"15"},{"manipulation":"6"},{"marchandage":"11"},{"médecine":"17"},{"mental":"17"},{"natation":"12"},{"physique":"9"},{"recherche":"5"},{"savoir":"16"},{"social":"11"},{"volonté":"16"}],"inventory":[{"Inventaire ":"(Valise)\n- Fioles vides\n- Herbes médicinales\n- Corde\n- Ciseaux\n- Seringue (Tsunami)\n- Arrosoir de poche\n- Laxatif\n- Boule d'engrais\n- 3 Fleurs violette\n- Aphrodite mortelle (Somnifère)\n- 4 Somnifères puissants (5 minutes)"}],"skills":"empty","spells":"empty"}
+{
+    "HP": "9",
+    "MP": "empty",
+    "age": "2",
+    "attack": "6",
+    "defense": "4",
+    "image": "empty",
+    "initiative": "2",
+    "inventory": [
+        {
+            "(Valise)": 1
+        },
+        {
+            "Fioles vides": 1
+        },
+        {
+            "Herbes médicinales": 1
+        },
+        {
+            "Corde": 1
+        },
+        {
+            "Ciseaux": 1
+        },
+        {
+            "Seringue (Tsunami)": 1
+        },
+        {
+            "Arrosoir de poche": 1
+        },
+        {
+            "Laxatif": 1
+        },
+        {
+            "Boule d'engrais": 1
+        },
+        {
+            "Fleurs violette": 3
+        },
+        {
+            "Aphrodite mortelle (Somnifère)": 1
+        },
+        {
+            "Somnifères puissants (5 minutes)": 4
+        }
+    ],
+    "job": "Herboriste",
+    "levels": "1",
+    "money": "0 Or - 4 Arg - 1 Cui",
+    "name": "Céleste Labard",
+    "race": "Humain",
+    "skills": "empty",
+    "spells": "empty",
+    "stats": [
+        {
+            "bricolage": "11"
+        },
+        {
+            "camouflage": "6"
+        },
+        {
+            "charisme": "2"
+        },
+        {
+            "combat_C/C": "1"
+        },
+        {
+            "combat_A/C": "12"
+        },
+        {
+            "combat_L/C": "12"
+        },
+        {
+            "conduite": "5"
+        },
+        {
+            "confection": "19"
+        },
+        {
+            "cuisine": "9"
+        },
+        {
+            "déguisement": "6"
+        },
+        {
+            "discrétion": "12"
+        },
+        {
+            "écriture": "15"
+        },
+        {
+            "équitation": "8"
+        },
+        {
+            "intelligence": "18"
+        },
+        {
+            "jeu": "9"
+        },
+        {
+            "lecture": "15"
+        },
+        {
+            "manipulation": "6"
+        },
+        {
+            "marchandage": "11"
+        },
+        {
+            "médecine": "17"
+        },
+        {
+            "mental": "17"
+        },
+        {
+            "natation": "12"
+        },
+        {
+            "physique": "9"
+        },
+        {
+            "recherche": "5"
+        },
+        {
+            "savoir": "16"
+        },
+        {
+            "social": "11"
+        },
+        {
+            "volonté": "16"
+        }
+    ],
+    "traits": [
+        "Visionnaire (Confection)",
+        "Psychopathe (+ Intelligence)",
+        "Patiente (+ Mental)",
+        "Main verte (+ Médecine)",
+        "Indépendante (+ Volonté)"
+    ]
+}

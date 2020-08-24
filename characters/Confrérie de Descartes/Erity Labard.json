@@ -1,1 +1,135 @@
-{"name":"Erity Labard","image":"https://zupimages.net/up/20/35/jahm.jpg","HP":"8","MP":"empty","levels":"1","age":"17","job":"Dompteuse","race":"Humain","money":"0 Or - 4 Argent - 2 Cuivre","initiative":"8","attack":"4","defense":"6","traits":["Amie","des","animaux","(+Equation)\nSociopathe","(+Volonté)\nJoyeuse","conne","(+Mental)\nNageuse","(Natation)\nHabile","(+Bricolage)"],"stats":[{"bricolage":"13"},{"camouflage":"6"},{"charisme":"20"},{"combat_C/C":"9"},{"combat_A/C":"1"},{"combat_L/C":"9"},{"conduite":"15"},{"confection":"20"},{"cuisine":"13"},{"déguisement":"6"},{"discrétion":"5"},{"écriture":"5"},{"équitation":"16"},{"intelligence":"14"},{"jeu":"3"},{"lecture":"10"},{"manipulation":"19"},{"marchandage":"1"},{"médecine":"17"},{"mental":"12"},{"natation":"14"},{"physique":"12"},{"recherche":"10"},{"savoir":"12"},{"social":"3"},{"volonté":"13"}],"inventory":[{"- Tonneaux (Bateau) (Nourriture":1},{"kit de soins)\n- Arbalète + Carreaux\n- Carte de navigation\n- Couverture\n- Kit de bricolage\n- Livres\n- Couteau suisse\n- Montre à gousset\n- Kit de soin\n- Bébé ouistiti (Conan)":1}],"skills":"empty","spells":"empty"}
+{
+    "HP": "8",
+    "MP": "empty",
+    "age": "17",
+    "attack": "4",
+    "defense": "6",
+    "image": "https://zupimages.net/up/20/35/jahm.jpg",
+    "initiative": "8",
+    "inventory": [
+        {
+            "Tonneaux (Bateau) (Nourriture, kit de soins)": 1
+        },
+        {
+            "Arbalète + Carreaux": 1
+        },
+        {
+            "Carte de navigation": 1
+        },
+        {
+            "Couverture": 1
+        },
+        {
+            "Kit de bricolage": 1
+        },
+        {
+            "Livres": 1
+        },
+        {
+            "Couteau suisse": 1
+        },
+        {
+            "Montre à gousset": 1
+        },
+        {
+            "Kit de soin": 1
+        },
+        {
+            "Bébé ouistiti (Conan)": 1
+        }
+    ],
+    "job": "Dompteuse",
+    "levels": "1",
+    "money": "0 Or - 4 Argent - 2 Cuivre",
+    "name": "Erity Labard",
+    "race": "Humain",
+    "skills": "empty",
+    "spells": "empty",
+    "stats": [
+        {
+            "bricolage": "13"
+        },
+        {
+            "camouflage": "6"
+        },
+        {
+            "charisme": "20"
+        },
+        {
+            "combat_C/C": "9"
+        },
+        {
+            "combat_A/C": "1"
+        },
+        {
+            "combat_L/C": "9"
+        },
+        {
+            "conduite": "15"
+        },
+        {
+            "confection": "20"
+        },
+        {
+            "cuisine": "13"
+        },
+        {
+            "déguisement": "6"
+        },
+        {
+            "discrétion": "5"
+        },
+        {
+            "écriture": "5"
+        },
+        {
+            "équitation": "16"
+        },
+        {
+            "intelligence": "14"
+        },
+        {
+            "jeu": "3"
+        },
+        {
+            "lecture": "10"
+        },
+        {
+            "manipulation": "19"
+        },
+        {
+            "marchandage": "1"
+        },
+        {
+            "médecine": "17"
+        },
+        {
+            "mental": "12"
+        },
+        {
+            "natation": "14"
+        },
+        {
+            "physique": "12"
+        },
+        {
+            "recherche": "10"
+        },
+        {
+            "savoir": "12"
+        },
+        {
+            "social": "3"
+        },
+        {
+            "volonté": "13"
+        }
+    ],
+    "traits": [
+        "Amie des animaux (+Equation)",
+        "Sociopathe (+Volonté)",
+        "Joyeuse conne (+Mental)",
+        "Nageuse (Natation)",
+        "Habile (+Bricolage)"
+    ]
+}

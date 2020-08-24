@@ -1,1 +1,78 @@
-{"name":"Yvan von Ygnis","image":"https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/fire-cat-stasya-tu.jpg","HP":"7","MP":"empty","levels":"1","age":"empty","job":"sorcier","race":"humain","money":"0","initiative":"+1","attack":"empty","defense":"12","traits":"empty","stats":[{"force":"8"},{"dexterité":"12"},{"constitution":"12"},{"intelligence":"15"},{"sagesse":"11"},{"charisme":"16"}],"inventory":[{"armure légere":1},{"massue":1},{"arbalète légère":1},{"bague familial":1},{"pack de l'étudiant":1}],"skills":["acrobatics 1","Arcane 4","Deception 3","Insight 0","Investigation 2","Nature 2","Performance 3","Religion 2","Stealth 1","Animal Handling 0","Athlétics -1","History 4","Intimidation 5","Médecine 0","Perception 0","Persuasion 5","Sleight of hand 1","Survie 0"],"spells":["chill touch 0","eldrith blast 0","charm person 1","illusory script 1"]}
+{
+    "HP": "7",
+    "MP": "empty",
+    "age": "empty",
+    "attack": "empty",
+    "defense": "12",
+    "image": "https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/fire-cat-stasya-tu.jpg",
+    "initiative": "+1",
+    "inventory": [
+        {
+            "armure légere": 1
+        },
+        {
+            "massue": 1
+        },
+        {
+            "arbalète légère": 1
+        },
+        {
+            "bague familial": 1
+        },
+        {
+            "pack de l'étudiant": 1
+        }
+    ],
+    "job": "sorcier",
+    "levels": "1",
+    "money": "0",
+    "name": "Yvan von Ygnis",
+    "race": "humain",
+    "skills": [
+        "acrobatics 1",
+        "Arcane 4",
+        "Deception 3",
+        "Insight 0",
+        "Investigation 2",
+        "Nature 2",
+        "Performance 3",
+        "Religion 2",
+        "Stealth 1",
+        "Animal Handling 0",
+        "Athlétics -1",
+        "History 4",
+        "Intimidation 5",
+        "Médecine 0",
+        "Perception 0",
+        "Persuasion 5",
+        "Sleight of hand 1",
+        "Survie 0"
+    ],
+    "spells": [
+        "chill touch 0",
+        "eldrith blast 0",
+        "charm person 1",
+        "illusory script 1"
+    ],
+    "stats": [
+        {
+            "force": "8"
+        },
+        {
+            "dexterité": "12"
+        },
+        {
+            "constitution": "12"
+        },
+        {
+            "intelligence": "15"
+        },
+        {
+            "sagesse": "11"
+        },
+        {
+            "charisme": "16"
+        }
+    ],
+    "traits": "empty"
+}

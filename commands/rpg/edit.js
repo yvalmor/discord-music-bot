@@ -52,7 +52,7 @@ module.exports = class See extends Command {
     }
 
     async run(message, { character_name, stat_name, value }) {
-        const path = `${process.cwd()}/characters/${message.guild.name}/${character_name}.json`;
+        const path = `${process.cwd()}/characters/${message.guild.name}/${character_name.replace('_', ' ')}.json`;
         try {
             fs.existsSync(path)
         } catch (e) {

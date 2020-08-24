@@ -241,9 +241,9 @@ module.exports = class Create extends Command {
             traits = traits.split(' ');
             let trait = '';
             for (let i = 0; i < traits.length - 1; i++)
-                trait += `${traits[i]}\n`;
+                trait += `${traits[i].replace('_', ' ')}\n`;
             if (traits.length > 0)
-                trait += `${traits[traits.length - 1]}`;
+                trait += `${traits[traits.length - 1].replace('_', ' ')}`;
             character.addField('Traits:', trait, true);
         }
         obj.traits = traits;
@@ -256,9 +256,9 @@ module.exports = class Create extends Command {
 
             let skill = '';
             for (let i = 0; i < skills.length - 1; i++)
-                skill += `${skills[i]}\n`;
+                skill += `${skills[i].replace('_', ' ')}\n`;
             if (skills.length > 0)
-                skill += `${skills[skills.length - 1]}`;
+                skill += `${skills[skills.length - 1].replace('_', ' ')}`;
             character.addField('Skills:', skill, true);
         }
         obj.skills = skills;
@@ -271,9 +271,9 @@ module.exports = class Create extends Command {
 
             let spell = '';
             for (let i = 0; i < spells.length - 1; i++)
-                spell += `${spells[i]}\n`;
+                spell += `${spells[i].replace('_', ' ')}\n`;
             if (spells.length > 0)
-                spell += `${spells[spells.length - 1]}`;
+                spell += `${spells[spells.length - 1].replace('_', ' ')}`;
             character.addField('Spells:', spell, true);
         }
         obj.spells = spells;
@@ -287,10 +287,10 @@ module.exports = class Create extends Command {
 
             for (let i = 0; i < s_names.length; i++) {
                 let o = {};
-                o[s_names[i]] = stats_values[i];
+                o[s_names[i]] = stats_values[i].replace('_', ' ');
                 obj.stats.push(o);
 
-                character.addField(`${s_names[i]} :`, stats_values[i], true)
+                character.addField(`${s_names[i].replace('_', ' ')} :`, stats_values[i], true)
             }
         } else obj.stats = null_word;
 
@@ -302,10 +302,10 @@ module.exports = class Create extends Command {
             for (let i = 0; i < inventory_obj.length; i++) {
                 const object = inventory_obj[i].split(': ');
                 let o = {};
-                o[object[0]] = object.length === 1 ? 1 : object[1];
+                o[object[0].replace('_', ' ')] = object.length === 1 ? 1 : object[1];
                 obj.inventory.push(o)
 
-                character.addField(`${object[0]} :`, o[object[0]], true)
+                character.addField(`${object[0].replace('_', ' ')} :`, o[object[0]], true)
             }
         } else obj.inventory = null_word;
 

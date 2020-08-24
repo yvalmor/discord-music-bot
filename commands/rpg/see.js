@@ -127,7 +127,7 @@ module.exports = class See extends Command {
         }
 
         if (inventory !== null_word && (stat_name === '' || stat_name === 'inventory')) {
-            if (stats === null_word)
+            if (stats === null_word || stat_name === 'inventory')
                 character.addField('\u200B', '\u200B');
 
             let invent = '';

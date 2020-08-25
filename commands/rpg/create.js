@@ -301,33 +301,39 @@ module.exports = class Create extends Command {
 
         if (stats !== null_word) {
             character.addField('\u200B', '\u200B');
-            character.addField('Stats:', '\u200B');
 
+            let stat = '';
             const s_names = stats_names.split(' ');
             const stats_values = stats.split(' ');
 
             for (let i = 0; i < s_names.length; i++) {
                 let o = {};
-                o[s_names[i]] = stats_values[i].replace('_', ' ');
+                o[s_names[i].replace('_', ' ')] = stats_values[i];
                 obj.stats.push(o);
 
-                character.addField(`${s_names[i].replace('_', ' ')} :`, stats_values[i], true)
+                stat += `${s_names[i].replace('_', ' ')}: ${stats_values[i]}`;
             }
+
+            character.addField('Stats:', stat, true);
         } else obj.stats = null_word;
 
         if (inventory !== null_word) {
-            character.addField('\u200B', '\u200B', false);
-            character.addField('Inventory :', '\u200B', false);
+            if (stats === null_word)
+                character.addField('\u200B', '\u200B', false);
 
+            let invent = '';
             const inventory_obj = inventory.split(', ');
+
             for (let i = 0; i < inventory_obj.length; i++) {
                 const object = inventory_obj[i].split(': ');
                 let o = {};
                 o[object[0].replace('_', ' ')] = object.length === 1 ? 1 : object[1];
                 obj.inventory.push(o)
 
-                character.addField(`${object[0].replace('_', ' ')} :`, o[object[0]], true)
+                invent += `${object[0].replace('_', ' ')}: ${o[object[0]]}`;
             }
+
+            character.addField('Inventory :', invent, true);
         } else obj.inventory = null_word;
 
         try {

@@ -84,7 +84,7 @@ module.exports = class See extends Command {
                 break;
             case 'Eyy Teikonia':
                 character.setURL(
-                    math.floor(math.random() * 2 + 1) === 2
+                    Math.floor(Math.random() * 2 + 1) === 2
                         ? 'https://imgur.com/KndTYNA'
                         : 'https://www.youtube.com/watch?v=ZFh301OAgSI');
                 break;

@@ -32,7 +32,9 @@ module.exports = class See extends Command {
     }
 
     async run(message, { character_name, stat_name }) {
-        const path = `${process.cwd()}/characters/${message.guild.name}/${character_name.replace('_', ' ')}.json`;
+
+        const path =
+            `${process.cwd()}/characters/${message.guild.name}/${character_name === 'Tiramisu' || character_name.replace('_', ' ') === 'Tiramisu Uchiha' ? 'Tsunami Uchiha' : character_name.replace('_', ' ')}.json`;
         try {
             fs.existsSync(path)
         } catch (e) {
@@ -74,6 +76,11 @@ module.exports = class See extends Command {
                 break;
             case 'Erity Labard':
                 character.setURL('https://www.youtube.com/watch?v=JOfqoq3_mEE');
+                break;
+            case 'Tsunami Uchiha':
+            case 'Tiramisu':
+            case 'Tiramisu Uchiha':
+                character.setURL('https://www.youtube.com/watch?v=cLmCJKT5ssw');
                 break;
         }
 

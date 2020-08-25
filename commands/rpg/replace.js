@@ -216,6 +216,9 @@ module.exports = class Replace extends Command {
             case 'Tiramisu Uchiha':
                 character.setURL('https://www.youtube.com/watch?v=cLmCJKT5ssw');
                 break;
+            case 'Eyy Teikonia':
+                character.setURL('https://imgur.com/KndTYNA');
+                break;
         }
 
         if (image !== null_word)

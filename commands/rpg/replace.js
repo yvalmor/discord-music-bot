@@ -217,7 +217,10 @@ module.exports = class Replace extends Command {
                 character.setURL('https://www.youtube.com/watch?v=cLmCJKT5ssw');
                 break;
             case 'Eyy Teikonia':
-                character.setURL('https://imgur.com/KndTYNA');
+                character.setURL(
+                    math.floor(math.random() * 2 + 1) === 2
+                        ? 'https://imgur.com/KndTYNA'
+                        : 'https://www.youtube.com/watch?v=ZFh301OAgSI');
                 break;
         }
 

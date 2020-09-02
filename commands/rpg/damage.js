@@ -1,12 +1,12 @@
 const { MessageEmbed } = require('discord.js');
 const { Command } = require('discord.js-commando');
 
-module.exports = class Update extends Command {
+module.exports = class Damage extends Command {
     constructor(client) {
         super(client, {
-            name: 'update',
+            name: 'damage',
             group: 'other',
-            memberName: 'update',
+            memberName: 'damage',
             description: 'Sends an update',
             hidden: true,
         });

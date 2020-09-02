@@ -3,38 +3,34 @@ const { Command } = require('discord.js-commando');
 const { null_word } = require('../../config.json');
 const fs = require('fs');
 
-module.exports = class See extends Command {
+module.exports = class Heal extends Command {
     constructor(client) {
         super(client, {
-            name: 'see',
-            memberName: 'see',
+            name: 'heal',
             group: 'rpg',
-            aliases: ['see-character'],
-            guildOnly: true,
-            description:
-                'See a character and its data',
+            memberName: 'heal',
+            aliases: ['base_health'],
+            description: 'Heals [heal] points to [name] player',
             args: [
                 {
                     key: 'character_name',
-                    prompt: 'What\'s the name of the character you want to see?',
+                    prompt: 'What\'s the name of the character you want to edit?',
                     type: 'string',
                     wait: 90
                 },
                 {
-                    key: 'stat_name',
-                    prompt: 'What\'s the name of the value you want to see?',
-                    type: 'string',
-                    default: '',
-                    wait: 90
+                    key: 'value',
+                    prompt: 'How much points?',
+                    type: 'integer',
+                    wait: 90,
+                    validate: value => value >= 0
                 }
             ]
         });
     }
 
-    async run(message, { character_name, stat_name }) {
-
-        const path =
-            `${process.cwd()}/characters/${message.guild.name}/${character_name === 'Tiramisu' || character_name.replace('_', ' ') === 'Tiramisu Uchiha' ? 'Tsunami Uchiha' : character_name.replace('_', ' ')}.json`;
+    async run(message, {character_name, value}) {
+        const path = `${process.cwd()}/characters/${message.guild.name}/${character_name.replace('_', ' ')}.json`;
         try {
             fs.existsSync(path)
         } catch (e) {
@@ -43,11 +39,40 @@ module.exports = class See extends Command {
             return;
         }
 
-        const {
+        let {
             name, image, levels, age, job, race,
             HP, base_HP, MP, alignment, proficiency, initiative, attack, defense, money,
             traits, stats, inventory, skills, spells
         } = require(path);
+
+        if (HP === null_word)
+        {
+            message.reply('This character doesn\'t have the HP characteristic').then();
+            return;
+        }
+
+        let obj = {
+            'name': name,
+            'image': image,
+            'HP': HP + value > base_HP ? base_HP : HP + value,
+            'base_HP': base_HP,
+            'MP': MP,
+            'levels': levels,
+            'age': age,
+            'job': job,
+            'race': race,
+            'money': money,
+            'alignment': alignment,
+            'proficiency': proficiency,
+            'initiative': initiative,
+            'attack': attack,
+            'defense': defense,
+            'traits': traits,
+            'stats': stats,
+            'inventory': inventory,
+            'skills': skills,
+            'spells': spells
+        };
 
         let separate = true;
         const space_separator = '      ';
@@ -115,7 +140,7 @@ module.exports = class See extends Command {
         if (proficiency !== null_word)
             character.addField('proficiency: ', proficiency, true);
 
-        if (traits !== null_word && (stat_name === '' || stat_name === 'traits')) {
+        if (traits !== null_word) {
             let trait = '';
             for (let t in traits)
                 trait += `${traits[t]}\n`;
@@ -124,7 +149,7 @@ module.exports = class See extends Command {
             character.addField('Traits:', trait, true);
         }
 
-        if (skills !== null_word && (stat_name === '' || stat_name === 'skills')) {
+        if (skills !== null_word) {
             let skill = '';
             for (let s in skills)
                 skill += `${skills[s]}\n`;
@@ -133,7 +158,7 @@ module.exports = class See extends Command {
             character.addField('Skills:', skill, true);
         }
 
-        if (spells !== null_word && (stat_name === '' || stat_name === 'spells')) {
+        if (spells !== null_word) {
             let spell = '';
             for (let s in spells)
                 spell += `${spells[s]}\n`;
@@ -143,7 +168,7 @@ module.exports = class See extends Command {
             character.addField('Spells:', spell, true);
         }
 
-        if (stats !== null_word && (stat_name === '' || stat_name === 'stats')) {
+        if (stats !== null_word) {
             character.addField('\u200B', '\u200B');
 
             let stat = '';
@@ -153,23 +178,26 @@ module.exports = class See extends Command {
                 stat += `${key}: ${stats[s][key]}\n`;
             }
 
-            character.addField('Stats:', stat, true);
+            character.addField('Stats:', stat);
         }
 
-        if (inventory !== null_word && (stat_name === '' || stat_name === 'inventory')) {
-            if (stats === null_word || stat_name === 'inventory')
-                character.addField('\u200B', '\u200B');
-
-            let invent = '';
+        if (inventory !== null_word) {
+            character.addField('\u200B', '\u200B');
+            character.addField('Inventory:', '\u200B');
 
             for (let s in inventory) {
                 const key = Object.keys(inventory[s])[0];
-                invent += `${key}: ${inventory[s][key]}\n`;
+                character.addField(key, inventory[s][key], true);
             }
-
-            character.addField('Inventory:', invent, true);
         }
+
+        await fs.unlink(path, (err => {
+            if (err) console.log(err)
+        }));
+
+        await fs.writeFileSync(
+            `${process.cwd()}/characters/${message.guild.name}/${name}.json`, JSON.stringify(obj, any => any, 4));
 
         await message.channel.send({ embed: character });
     }
-};
+}

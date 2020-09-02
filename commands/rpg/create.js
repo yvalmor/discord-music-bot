@@ -341,7 +341,22 @@ module.exports = class Create extends Command {
         obj.skills = skills;
 
         if (spells !== null_word) {
-            if (!spells.startsWith('niveau')) {
+            if (spells.startsWith('niveau') || spells.startsWith('level') || spells.startsWith('lv') || spells.startsWith('nv')) {
+                spells = spells.split('\n');
+
+                if (traits === null_word && skills === null_word)
+                    character.addField('\u200B', '\u200B');
+
+                character.addField('Spells:', '\u200B');
+
+                for (let i = 0; i < spells.length; i++) {
+                    let spell = spells[i].split(': ');
+                    const spell_lv = spell[0];
+                    const sp = spell[1].split(', ').sort().join(', ');
+
+                    character.addField(spell_lv, sp);
+                }
+            } else {
                 spells = spells.split(', ').sort();
 
                 if (traits === null_word && skills === null_word)
@@ -353,21 +368,6 @@ module.exports = class Create extends Command {
                 if (spells.length > 0)
                     spell += `${spells[spells.length - 1]}`;
                 character.addField('Spells:', spell, true);
-            } else {
-                spells = spells.split('\n');
-
-                if (traits === null_word && skills === null_word)
-                    character.addField('\u200B', '\u200B');
-
-                character.addField('Spells:', '\u200B');
-
-                for (let i = 0; i < spells.length; i++){
-                    let spell = spells[i].split(': ');
-                    const spell_lv = spell[0];
-                    const sp = spell[1].split(', ').sort().join(', ');
-
-                    character.addField(spell_lv, sp);
-                }
             }
         }
         obj.spells = spells;

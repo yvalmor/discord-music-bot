@@ -290,9 +290,9 @@ module.exports = class See extends Command {
             if (err) console.log(err)
         }));
 
-        await message.channel.send({ embed: character });
+        await fs.writeFileSync(`${process.cwd()}/characters/${message.guild.name}/${name}.json`, JSON.stringify(obj, any => any, 4));
 
-        fs.writeFileSync(`${process.cwd()}/characters/${message.guild.name}/${name}.json`, JSON.stringify(obj));
+        await message.channel.send({ embed: character });
     }
 
     dict_modification(array, string){

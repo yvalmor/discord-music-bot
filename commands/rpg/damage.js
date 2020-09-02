@@ -21,7 +21,7 @@ module.exports = class Damage extends Command {
                 {
                     key: 'value',
                     prompt: 'How much damages?',
-                    type: 'int',
+                    type: 'integer',
                     wait: 90,
                     validate: value => value >= 0
                 }

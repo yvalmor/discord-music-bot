@@ -1,6 +1,7 @@
 .idea
 ./config.json
 *.ppk
+./characters/*
 
 # NodeJS specific #
 .nyc_output/

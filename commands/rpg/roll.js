@@ -44,20 +44,24 @@ module.exports = class ReloadCommand extends Command {
         let nbFail = 0,
             nbWin = 0;
 
+        let rolls = "";
+
         for (let i = 0; i < rollNumber; i++) {
             console.log(i)
 
             rnd = Math.floor(Math.random() * faces + 1);
 
             if (rnd == faces) {
-                rollResults.addField(`Roll n°${i + 1}      `, `${rnd.toString()}, réussite critique`, true);
+                rolls += `Roll n°${i + 1}: ${rnd.toString()}, réussite critique\n`;
                 nbWin++;
             } else if (rnd == 1) {
-                rollResults.addField(`Roll n°${i + 1}      `, `${rnd.toString()}, échec critique`, true);
+                rolls += `Roll n°${i + 1}: ${rnd.toString()}, échec critique\n`;
                 nbFail++;
             } else
-                rollResults.addField(`Roll n°${i + 1}      `, `${rnd.toString()}`, true)
+                rolls += `Roll n°${i + 1}: ${rnd.toString()}\n`;
         }
+
+        rollResults.addField('Rolls:', rolls);
 
         if (nbFail < nbWin) {
             rollResults.setImage(this.random_item(success));

@@ -62,7 +62,9 @@ module.exports = class See extends Command {
         }
 
         let {
-            name, image, levels, age, job, race, HP, MP, initiative, attack, defense, money, traits, stats, inventory, skills, spells
+            name, image, levels, age, job, race,
+            HP, MP, alignment, proficiency, initiative, attack, defense, money,
+            traits, stats, inventory, skills, spells
         } = require(path);
 
         let obj = {
@@ -75,6 +77,8 @@ module.exports = class See extends Command {
             'job': job,
             'race': race,
             'money': money,
+            'alignment': alignment,
+            'proficiency': proficiency,
             'initiative': initiative,
             'attack': attack,
             'defense': defense,
@@ -118,6 +122,14 @@ module.exports = class See extends Command {
             case 'MP':
                 obj.MP = value;
                 MP = value;
+                break;
+            case 'alignment':
+                obj.alignment = value;
+                alignment = value;
+                break;
+            case 'proficiency':
+                obj.proficiency = value;
+                proficiency = value;
                 break;
             case 'initiative':
                 obj.initiative = value;
@@ -217,6 +229,11 @@ module.exports = class See extends Command {
             character.addField('defense: ', defense, true);
         if (money !== null_word)
             character.addField('money: ', money, true);
+
+        if (alignment !== null_word)
+            character.addField('alignment: ', alignment, true);
+        if (proficiency !== null_word)
+            character.addField('proficiency: ', proficiency, true);
 
         if (traits !== null_word) {
             let trait = '';

@@ -3,6 +3,36 @@ const { Command } = require('discord.js-commando');
 const { null_word } = require('../../config.json');
 const fs = require('fs');
 
+const create_details = 'Creates an rpg character and save its stats/inventory, ' +
+    `the word \`${null_word}\` can be used to indicate that the stat isn\'t used (it can still be be edited afterwards)\n` +
+    'You can use the option -f to replace an already existing character by typing \`!create -f\` instead of \`!create\`\n' +
+    'The characteristics saved by the bot are :\n' +
+    `   - The name of the character (can't use ${null_word}),\n` +
+    '   - A profile image for the character,\n' +
+    '   - The level of the character,\n' +
+    '   - The age of the character,\n' +
+    '   - The job of the character,\n' +
+    '   - The amount of HP of the character,\n' +
+    '   - The amount of MP of the character,\n' +
+    '   - The alignment of the character\n' +
+    '   - The proficiency of the character\n' +
+    '   - The initiative of the character,\n' +
+    '   - The attack of the character,\n' +
+    '   - The defense of the character,\n' +
+    '   - The money of the character,\n\n' +
+    'The next characteristics must be entered this way:\n' +
+    '\`value 1, value 2, value 3, etc\`\n\n' +
+    '   - The traits of the character,\n' +
+    '   - The skills of the character,\n' +
+    '   - The spells of the character,\n' +
+    '   - The names of the stats of the character\n' +
+    '   - The corresponding values of the stats of the character (there must be an identical number of names and values)\n' +
+    'The next characteristics must be entered this way:\n' +
+    '\`name 1: value 1, name 2: value 2, name 3: value 3, etc\`\n' +
+    'If one of the values is equal to 1 you can just put the name without the value, for example, if \`name 1\` has its value to 1 you could type:\n' +
+    '\`name 1, name 2: value 2, name 3: value 3, etc\`\n\n' +
+    '   - The inventory of the character\n';
+
 module.exports = class Create extends Command {
 
     constructor(client){
@@ -14,9 +44,17 @@ module.exports = class Create extends Command {
             guildOnly: true,
             description:
                 'Creates an rpg character and save its stats/inventory, ' +
-                'the word \`empty\` can be used to indicate that the stat isn\'t used (it can still be be edited afterwards)',
-            usage: '[name] [stats] {inventory}',
+                `the word \`${null_word}\` can be used to indicate that the stat isn\'t used (it can still be be edited afterwards)`,
+            details:
+                create_details,
             args: [
+                {
+                    key: 'options',
+                    prompt: 'Do you want to replace a character?',
+                    type: 'string',
+                    default: '',
+                    validate: options => options === '-f' || options === ''
+                },
                 {
                     key: 'name',
                     prompt: 'What\'s the name of your character?',
@@ -61,6 +99,20 @@ module.exports = class Create extends Command {
                     validate: race => race.length > 0 || race === null_word
                 },
                 {
+                    key: 'alignment',
+                    prompt: 'What\'s the alignment of your character?',
+                    type: 'string',
+                    wait: 90,
+                    validate: alignment => alignment === null_word || alignment.length > 0
+                },
+                {
+                    key: 'proficiency',
+                    prompt: 'What\'s the proficiency of your character?',
+                    type: 'string',
+                    wait: 90,
+                    validate: proficiency => proficiency === null_word || proficiency >= 0
+                },
+                {
                     key: 'HP',
                     prompt: 'How much HP does your character have?',
                     type: 'string',
@@ -79,7 +131,7 @@ module.exports = class Create extends Command {
                     prompt: 'How much initiative does your character have?',
                     type: 'string',
                     wait: 90,
-                    validate: initiative => initiative > 0 || initiative === null_word
+                    validate: initiative => !isNaN(initiative) || initiative === null_word
                 },
                 {
                     key: 'attack',
@@ -148,9 +200,9 @@ module.exports = class Create extends Command {
     }
 
     async run(message, {
-                  name,image,
+                  options, name,image,
                   levels, age, job, race, HP, MP, initiative, attack, defense, money,
-                  traits, stats_names, stats, inventory, skills, spells
+                  traits, stats_names, stats, inventory, skills, spells, alignment, proficiency
     }) {
         const path = `${process.cwd()}/characters/${message.guild.name}/${name}.json`;
 
@@ -189,6 +241,8 @@ module.exports = class Create extends Command {
             'initiative': initiative,
             'attack': attack,
             'defense': defense,
+            'alignment': alignment,
+            'proficiency': proficiency,
             'traits': [],
             'stats': [],
             'inventory': [],
@@ -256,45 +310,47 @@ module.exports = class Create extends Command {
         if (money !== null_word)
             character.addField('money: ', money, true);
 
+        if (ali)
+
         if (traits !== null_word) {
             character.addField('\u200B', '\u200B');
 
-            traits = traits.split(' ');
+            traits = traits.split(', ');
             let trait = '';
             for (let i = 0; i < traits.length - 1; i++)
-                trait += `${traits[i].replace('_', ' ')}\n`;
+                trait += `${traits[i]}\n`;
             if (traits.length > 0)
-                trait += `${traits[traits.length - 1].replace('_', ' ')}`;
+                trait += `${traits[traits.length - 1]}`;
             character.addField('Traits:', trait, true);
         }
         obj.traits = traits;
 
         if (skills !== null_word) {
-            skills = skills.split(' ');
+            skills = skills.split(', ');
 
             if (traits === null_word)
                 character.addField('\u200B', '\u200B');
 
             let skill = '';
             for (let i = 0; i < skills.length - 1; i++)
-                skill += `${skills[i].replace('_', ' ')}\n`;
+                skill += `${skills[i]}\n`;
             if (skills.length > 0)
-                skill += `${skills[skills.length - 1].replace('_', ' ')}`;
+                skill += `${skills[skills.length - 1]}`;
             character.addField('Skills:', skill, true);
         }
         obj.skills = skills;
 
         if (spells !== null_word) {
-            spells = spells.split(' ');
+            spells = spells.split(', ');
 
             if (traits === null_word && skills === null_word)
                 character.addField('\u200B', '\u200B');
 
             let spell = '';
             for (let i = 0; i < spells.length - 1; i++)
-                spell += `${spells[i].replace('_', ' ')}\n`;
+                spell += `${spells[i]}\n`;
             if (spells.length > 0)
-                spell += `${spells[spells.length - 1].replace('_', ' ')}`;
+                spell += `${spells[spells.length - 1]}`;
             character.addField('Spells:', spell, true);
         }
         obj.spells = spells;
@@ -303,8 +359,8 @@ module.exports = class Create extends Command {
             character.addField('\u200B', '\u200B');
 
             let stat = '';
-            const s_names = stats_names.split(' ');
-            const stats_values = stats.split(' ');
+            const s_names = stats_names.split(', ');
+            const stats_values = stats.split(', ');
 
             for (let i = 0; i < s_names.length; i++) {
                 let o = {};
@@ -342,6 +398,21 @@ module.exports = class Create extends Command {
             console.error(e);
             fs.mkdirSync(`${process.cwd()}/characters/${message.guild.name}`);
         }
+
+        if (options === '-f')
+            try {
+                if (fs.accessSync(path))
+                    fs.unlinkSync(path);
+            } catch (e) {
+                console.error(e);
+            }
+        else
+            try {
+                fs.accessSync(path);
+            } catch (e) {
+                console.error(e);
+                message.reply('This character already exists\nTry using the -f option to overwrite it.').then();
+            }
 
         fs.writeFile(path, JSON.stringify(obj), (err) => {
             if (err) console.error(err);

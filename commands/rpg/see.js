@@ -44,7 +44,9 @@ module.exports = class See extends Command {
         }
 
         const {
-            name, image, levels, age, job, race, HP, MP, initiative, attack, defense, money, traits, stats, inventory, skills, spells
+            name, image, levels, age, job, race,
+            HP, MP, alignment, proficiency, initiative, attack, defense, money,
+            traits, stats, inventory, skills, spells
         } = require(path);
 
         let separate = true;
@@ -107,6 +109,11 @@ module.exports = class See extends Command {
             character.addField('defense: ', defense, true);
         if (money !== null_word)
             character.addField('money: ', money, true);
+
+        if (alignment !== null_word)
+            character.addField('alignment: ', alignment, true);
+        if (proficiency !== null_word)
+            character.addField('proficiency: ', proficiency, true);
 
         if (traits !== null_word && (stat_name === '' || stat_name === 'traits')) {
             let trait = '';

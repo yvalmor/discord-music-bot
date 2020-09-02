@@ -63,7 +63,7 @@ module.exports = class See extends Command {
 
         let {
             name, image, levels, age, job, race,
-            HP, MP, alignment, proficiency, initiative, attack, defense, money,
+            HP, base_HP, MP, alignment, proficiency, initiative, attack, defense, money,
             traits, stats, inventory, skills, spells
         } = require(path);
 
@@ -71,6 +71,7 @@ module.exports = class See extends Command {
             'name': name,
             'image': image,
             'HP': HP,
+            'base_HP': base_HP,
             'MP': MP,
             'levels': levels,
             'age': age,
@@ -118,6 +119,10 @@ module.exports = class See extends Command {
             case 'HP':
                 obj.HP = value;
                 HP = value;
+                break;
+            case 'base_HP':
+                obj.base_HP = value;
+                base_HP = value;
                 break;
             case 'MP':
                 obj.MP = value;
@@ -217,7 +222,7 @@ module.exports = class See extends Command {
             character.setThumbnail(image);
 
         if (HP !== null_word)
-            character.addField('HP: ', HP, true);
+            character.addField('HP: ', `${HP}/${base_HP}`, true);
         if (MP !== null_word)
             character.addField('MP: ', MP, true);
 

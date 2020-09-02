@@ -41,7 +41,7 @@ module.exports = class Damage extends Command {
 
         let {
             name, image, levels, age, job, race,
-            HP, MP, alignment, proficiency, initiative, attack, defense, money,
+            HP, base_HP, MP, alignment, proficiency, initiative, attack, defense, money,
             traits, stats, inventory, skills, spells
         } = require(path);
 
@@ -55,6 +55,7 @@ module.exports = class Damage extends Command {
             'name': name,
             'image': image,
             'HP': HP - value,
+            'base_HP': base_HP,
             'MP': MP,
             'levels': levels,
             'age': age,
@@ -121,7 +122,7 @@ module.exports = class Damage extends Command {
             character.setThumbnail(image);
 
         if (HP !== null_word)
-            character.addField('HP: ', HP, true);
+            character.addField('HP: ', `${HP}/${base_HP}`, true);
         if (MP !== null_word)
             character.addField('MP: ', MP, true);
 

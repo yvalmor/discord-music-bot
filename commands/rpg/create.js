@@ -232,6 +232,7 @@ module.exports = class Create extends Command {
             'name': name,
             'image': image,
             'HP': HP,
+            'base_HP': HP,
             'MP': MP,
             'levels': levels,
             'age': age,
@@ -297,7 +298,7 @@ module.exports = class Create extends Command {
             character.setThumbnail(image);
 
         if (HP !== null_word)
-            character.addField('HP: ', HP, true);
+            character.addField('HP: ', `${HP}/${HP}`, true);
         if (MP !== null_word)
             character.addField('MP: ', MP, true);
 

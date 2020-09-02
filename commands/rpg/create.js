@@ -341,17 +341,34 @@ module.exports = class Create extends Command {
         obj.skills = skills;
 
         if (spells !== null_word) {
-            spells = spells.split(', ');
+            if (!spells.startsWith('niveau')) {
+                spells = spells.split(', ').sort();
 
-            if (traits === null_word && skills === null_word)
-                character.addField('\u200B', '\u200B');
+                if (traits === null_word && skills === null_word)
+                    character.addField('\u200B', '\u200B');
 
-            let spell = '';
-            for (let i = 0; i < spells.length - 1; i++)
-                spell += `${spells[i]}\n`;
-            if (spells.length > 0)
-                spell += `${spells[spells.length - 1]}`;
-            character.addField('Spells:', spell, true);
+                let spell = '';
+                for (let i = 0; i < spells.length - 1; i++)
+                    spell += `${spells[i]}\n`;
+                if (spells.length > 0)
+                    spell += `${spells[spells.length - 1]}`;
+                character.addField('Spells:', spell, true);
+            } else {
+                spells = spells.split('\n');
+
+                if (traits === null_word && skills === null_word)
+                    character.addField('\u200B', '\u200B');
+
+                character.addField('Spells:', '\u200B');
+
+                for (let i = 0; i < spells.length; i++){
+                    let spell = spells[i].split(': ');
+                    const spell_lv = spell[0];
+                    const sp = spell[1].split(', ').sort().join(', ');
+
+                    character.addField(spell_lv, sp);
+                }
+            }
         }
         obj.spells = spells;
 
@@ -419,9 +436,5 @@ module.exports = class Create extends Command {
         });
 
         await message.channel.send({ embed: character });
-    }
-
-    async sort(spells){
-        let sp = spells.sort();
     }
 }

@@ -1,4 +1,4 @@
-const { author_id, token } = require('../../config.json')
+const { token } = require('../../config.json')
 const { Command } = require('discord.js-commando');
 
 module.exports = class ReloadCommand extends Command {

@@ -378,7 +378,7 @@ module.exports = class Create extends Command {
                 character.addField('\u200B', '\u200B', false);
 
             let invent = '';
-            const inventory_obj = inventory.split(', ');
+            const inventory_obj = inventory.split(', ').sort();
 
             for (let i = 0; i < inventory_obj.length; i++) {
                 const object = inventory_obj[i].split(': ');
@@ -419,5 +419,9 @@ module.exports = class Create extends Command {
         });
 
         await message.channel.send({ embed: character });
+    }
+
+    async sort(spells){
+        let sp = spells.sort();
     }
 }

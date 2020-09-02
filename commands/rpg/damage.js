@@ -54,7 +54,7 @@ module.exports = class Damage extends Command {
         let obj = {
             'name': name,
             'image': image,
-            'HP': !HP.isNaN ? HP - value : HP,
+            'HP': HP - value,
             'base_HP': base_HP,
             'MP': MP,
             'levels': levels,
@@ -122,7 +122,7 @@ module.exports = class Damage extends Command {
             character.setThumbnail(image);
 
         if (HP !== null_word)
-            character.addField('HP: ', `${HP}/${base_HP}`, true);
+            character.addField('HP: ', `${obj.HP}/${base_HP}`, true);
         if (MP !== null_word)
             character.addField('MP: ', MP, true);
 

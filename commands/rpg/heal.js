@@ -122,7 +122,7 @@ module.exports = class Heal extends Command {
             character.setThumbnail(image);
 
         if (HP !== null_word)
-            character.addField('HP: ', `${HP}/${base_HP}`, true);
+            character.addField('HP: ', `${obj.HP}/${base_HP}`, true);
         if (MP !== null_word)
             character.addField('MP: ', MP, true);
 

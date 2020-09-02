@@ -1,1 +1,128 @@
-{"name":"Glenn Hyakuya","image":"https://media.customon.com/unsafe/600x600/img.customon.com//art/2/600/600/0a0909/67594/55ed13fa429647d7c11d4284648a7699.png.jpg","HP":"9","MP":"empty","levels":"1","age":"38","job":"Ingénieur","race":"empty","money":"0o, 12a, 2c","initiative":"14","attack":"6","defense":"4","traits":["savant_fou (+savoir)","immoral (+mental)","érudit (+lecture)","dextérité (+bricolage)","margoulin (+marchandage)"],"stats":[{"bricolage":"13"},{"camouflage":"6"},{"charisme":"10"},{"combat_C/C":"1"},{"combat_A/C":"11"},{"combat_L/C":"20"},{"conduite":"9"},{"confection":"16"},{"cuisine":"2"},{"déguisement":"9"},{"discrétion":"7"},{"écriture":"14"},{"équitation":"3"},{"intelligence":"18"},{"jeu":"9"},{"lecture":"12"},{"manipulation":"20"},{"marchandage":"8"},{"médecine":"14"},{"mental":"9"},{"natation":"3"},{"physique":"6"},{"recherche":"17"},{"savoir":"11"},{"social":"10"},{"volonté":"10"}],"inventory":[{"fusil de sniper":1},{"balles":1},{"poudre à canon":1},{"couteau suisse":1},{"montre à gousset":1},{"kit de bricolage":1},{"crayon + cahier de brouillon":1}],"skills":"empty","spells":"empty"}
+{
+    "HP": "9",
+    "MP": "empty",
+    "alignment": "empty",
+    "proficiency": "empty",
+    "age": "38",
+    "attack": "6",
+    "defense": "4",
+    "image": "https://media.customon.com/unsafe/600x600/img.customon.com//art/2/600/600/0a0909/67594/55ed13fa429647d7c11d4284648a7699.png.jpg",
+    "initiative": "14",
+    "inventory": [
+        {
+            "fusil de sniper": 1
+        },
+        {
+            "balles": 1
+        },
+        {
+            "poudre à canon": 1
+        },
+        {
+            "couteau suisse": 1
+        },
+        {
+            "montre à gousset": 1
+        },
+        {
+            "kit de bricolage": 1
+        },
+        {
+            "crayon + cahier de brouillon": 1
+        }
+    ],
+    "job": "Ingénieur",
+    "levels": "1",
+    "money": "0o, 12a, 2c",
+    "name": "Glenn Hyakuya",
+    "race": "empty",
+    "skills": "empty",
+    "spells": "empty",
+    "stats": [
+        {
+            "bricolage": "13"
+        },
+        {
+            "camouflage": "6"
+        },
+        {
+            "charisme": "10"
+        },
+        {
+            "combat_C/C": "1"
+        },
+        {
+            "combat_A/C": "11"
+        },
+        {
+            "combat_L/C": "20"
+        },
+        {
+            "conduite": "9"
+        },
+        {
+            "confection": "16"
+        },
+        {
+            "cuisine": "2"
+        },
+        {
+            "déguisement": "9"
+        },
+        {
+            "discrétion": "7"
+        },
+        {
+            "écriture": "14"
+        },
+        {
+            "équitation": "3"
+        },
+        {
+            "intelligence": "18"
+        },
+        {
+            "jeu": "9"
+        },
+        {
+            "lecture": "12"
+        },
+        {
+            "manipulation": "20"
+        },
+        {
+            "marchandage": "8"
+        },
+        {
+            "médecine": "14"
+        },
+        {
+            "mental": "9"
+        },
+        {
+            "natation": "3"
+        },
+        {
+            "physique": "6"
+        },
+        {
+            "recherche": "17"
+        },
+        {
+            "savoir": "11"
+        },
+        {
+            "social": "10"
+        },
+        {
+            "volonté": "10"
+        }
+    ],
+    "traits": [
+        "savant_fou (+savoir)",
+        "immoral (+mental)",
+        "érudit (+lecture)",
+        "dextérité (+bricolage)",
+        "margoulin (+marchandage)"
+    ]
+}

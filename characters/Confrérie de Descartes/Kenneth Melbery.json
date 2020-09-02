@@ -1,1 +1,116 @@
-{"name":"Kenneth Melbery","image":"https://zupimages.net/up/20/35/js3v.png","HP":"6","MP":"empty","levels":"1","age":"24","job":"Lanceur de couteaux","race":"empty","money":"0 or - 1 argent - 6 cuivre","initiative":"17","attack":"6","defense":"4","traits":["joueur (+ jeu)","sociable (auto social)","soigné (+ charisme)","orgueilleux (+ volonté)","provocateur (+ manipulation)"],"stats":[{"bricolage":"4"},{"camouflage":"4"},{"charisme":"20"},{"combat_C/C":"7"},{"combat_A/C":"15"},{"combat_L/C":"16"},{"conduite":"4"},{"confection":"18"},{"cuisine":"6"},{"déguisement":"12"},{"discrétion":"3"},{"écriture":"11"},{"équitation":"7"},{"intelligence":"10"},{"jeu":"14"},{"lecture":"16"},{"manipulation":"3"},{"marchandage":"20"},{"médecine":"6"},{"mental":"13"},{"natation":"1"},{"physique":"9"},{"recherche":"2"},{"savoir":"8"},{"social":"16"}],"inventory":[{"fleurs en tissus":1},{"son doudou":1},{"couteaux":4},{"hache dans un étui":1}],"skills":"empty","spells":"empty"}
+{
+    "HP": "6",
+    "MP": "empty",
+    "alignment": "empty",
+    "proficiency": "empty",
+    "age": "24",
+    "attack": "6",
+    "defense": "4",
+    "image": "https://zupimages.net/up/20/35/js3v.png",
+    "initiative": "17",
+    "inventory": [
+        {
+            "fleurs en tissus": 1
+        },
+        {
+            "son doudou": 1
+        },
+        {
+            "couteaux": 4
+        },
+        {
+            "hache dans un étui": 1
+        }
+    ],
+    "job": "Lanceur de couteaux",
+    "levels": "1",
+    "money": "0 or - 1 argent - 6 cuivre",
+    "name": "Kenneth Melbery",
+    "race": "empty",
+    "skills": "empty",
+    "spells": "empty",
+    "stats": [
+        {
+            "bricolage": "4"
+        },
+        {
+            "camouflage": "4"
+        },
+        {
+            "charisme": "20"
+        },
+        {
+            "combat_C/C": "7"
+        },
+        {
+            "combat_A/C": "15"
+        },
+        {
+            "combat_L/C": "16"
+        },
+        {
+            "conduite": "4"
+        },
+        {
+            "confection": "18"
+        },
+        {
+            "cuisine": "6"
+        },
+        {
+            "déguisement": "12"
+        },
+        {
+            "discrétion": "3"
+        },
+        {
+            "écriture": "11"
+        },
+        {
+            "équitation": "7"
+        },
+        {
+            "intelligence": "10"
+        },
+        {
+            "jeu": "14"
+        },
+        {
+            "lecture": "16"
+        },
+        {
+            "manipulation": "3"
+        },
+        {
+            "marchandage": "20"
+        },
+        {
+            "médecine": "6"
+        },
+        {
+            "mental": "13"
+        },
+        {
+            "natation": "1"
+        },
+        {
+            "physique": "9"
+        },
+        {
+            "recherche": "2"
+        },
+        {
+            "savoir": "8"
+        },
+        {
+            "social": "16"
+        }
+    ],
+    "traits": [
+        "joueur (+ jeu)",
+        "sociable (auto social)",
+        "soigné (+ charisme)",
+        "orgueilleux (+ volonté)",
+        "provocateur (+ manipulation)"
+    ]
+}

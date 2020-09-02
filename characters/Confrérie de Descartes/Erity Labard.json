@@ -1,6 +1,8 @@
 {
     "HP": "8",
     "MP": "empty",
+    "alignment": "empty",
+    "proficiency": "empty",
     "age": "17",
     "attack": "4",
     "defense": "6",

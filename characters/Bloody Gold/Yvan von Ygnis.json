@@ -2,6 +2,8 @@
     "HP": "7",
     "MP": "empty",
     "age": "empty",
+    "alignment": "empty",
+    "proficiency": "empty",
     "attack": "empty",
     "defense": "12",
     "image": "https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/fire-cat-stasya-tu.jpg",

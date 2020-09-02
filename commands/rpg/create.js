@@ -433,7 +433,7 @@ module.exports = class Create extends Command {
             }
 
         await fs.writeFileSync(
-            `${process.cwd()}/characters/${message.guild.name}/${name}.json`, JSON.stringify(obj, any => any, 4));
+            `${process.cwd()}/characters/${message.guild.name}/${name}.json`, JSON.stringify(obj));
 
         await message.channel.send({ embed: character });
     }

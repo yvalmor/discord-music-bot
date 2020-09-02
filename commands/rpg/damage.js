@@ -54,7 +54,7 @@ module.exports = class Damage extends Command {
         let obj = {
             'name': name,
             'image': image,
-            'HP': HP - value,
+            'HP': Number.isInteger(HP) ? HP - value : HP,
             'base_HP': base_HP,
             'MP': MP,
             'levels': levels,

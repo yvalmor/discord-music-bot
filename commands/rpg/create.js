@@ -431,9 +431,8 @@ module.exports = class Create extends Command {
                 message.reply('This character already exists\nTry using the -f option to overwrite it.').then();
             }
 
-        fs.writeFile(path, JSON.stringify(obj), (err) => {
-            if (err) console.error(err);
-        });
+        await fs.writeFileSync(
+            `${process.cwd()}/characters/${message.guild.name}/${name}.json`, JSON.stringify(obj, any => any, 4));
 
         await message.channel.send({ embed: character });
     }

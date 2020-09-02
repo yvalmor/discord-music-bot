@@ -270,7 +270,7 @@ module.exports = class See extends Command {
 
             for (let s in stats) {
                 const key = Object.keys(stats[s])[0];
-                stat += `${key}: ${stats[s][key]}`;
+                stat += `${key}: ${stats[s][key]}\n`;
             }
 
             character.addField('Stats:', stat);
@@ -290,7 +290,8 @@ module.exports = class See extends Command {
             if (err) console.log(err)
         }));
 
-        await fs.writeFileSync(`${process.cwd()}/characters/${message.guild.name}/${name}.json`, JSON.stringify(obj, any => any, 4));
+        await fs.writeFileSync(
+            `${process.cwd()}/characters/${message.guild.name}/${name}.json`, JSON.stringify(obj, any => any, 4));
 
         await message.channel.send({ embed: character });
     }

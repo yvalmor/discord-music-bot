@@ -17,12 +17,6 @@ Structures.extend('Guild', function(Guild) {
                 songDispatcher: null,
                 volume: 1
             };
-            this.triviaData = {
-                isTriviaRunning: false,
-                wasTriviaEndCalled: false,
-                triviaQueue: [],
-                triviaScore: new Map()
-            };
         }
     }
     return MusicGuild;

@@ -34,7 +34,9 @@ module.exports = class See extends Command {
     async run(message, { character_name, stat_name }) {
 
         const path =
-            `${process.cwd()}/characters/${message.guild.name}/${character_name === 'Tiramisu' || character_name.replace('_', ' ') === 'Tiramisu Uchiha' ? 'Tsunami Uchiha' : character_name.replace('_', ' ')}.json`;
+            `${process.cwd()}/characters/${message.guild.name}/${
+                character_name === 'Tiramisu' || character_name.replace('_', ' ') === 'Tiramisu Uchiha' ?
+                'Tsunami Uchiha' : character_name.replace('_', ' ')}.json`;
         try {
             fs.existsSync(path)
         } catch (e) {

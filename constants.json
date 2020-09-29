@@ -1,0 +1,99 @@
+{
+    "img": {
+        "name": "./sheet.png",
+        "width": 1449,
+        "height": 2048
+    },
+
+    "surname_pos": {
+        "x": 180,
+        "y": 190,
+        "size": 24
+    },
+    "name_pos": {
+        "x": 880,
+        "y": 190,
+        "size": 24
+    },
+
+    "race_pos": {
+        "x": 0,
+        "y": 0,
+        "size": 24
+    },
+    "job_pos": {
+        "x": 0,
+        "y": 0,
+        "size": 24
+    },
+    "levels_pos": {
+        "x": 0,
+        "y": 0,
+        "size": 24
+    },
+
+    "money_pos": {
+        "x": 0,
+        "y": 0,
+        "size": 24
+    },
+
+    "initiative_pos": {
+        "x": 0,
+        "y": 0,
+        "size": 24
+    },
+
+    "HP_pos": {
+        "x": 0,
+        "y": 0,
+        "size": 24
+    },
+    "base_HP_pos": {
+        "x": 0,
+        "y": 0,
+        "size": 24
+    },
+
+    "alignment_pos": {
+        "x": 0,
+        "y": 0,
+        "size": 24
+    },
+    "proficiency_pos": {
+        "x": 0,
+        "y": 0,
+        "size": 24
+    },
+
+    "inventory_pos": {
+        "gap": 10,
+        "x": 0,
+        "y": 0,
+        "size": 24
+    },
+    "traits_pos": {
+        "gap": 10,
+        "x": 0,
+        "y": 0,
+        "size": 24
+    },
+    "skills_pos": {
+        "gap": 10,
+        "x": 0,
+        "y": 0,
+        "size": 24
+    },
+    "spells_pos": {
+        "gap": 10,
+        "x": 0,
+        "y": 0,
+        "size": 24
+    },
+    "stats_pos": {
+        "gap": 10,
+        "x": 0,
+        "y": 0,
+        "size": 24
+    }
+}

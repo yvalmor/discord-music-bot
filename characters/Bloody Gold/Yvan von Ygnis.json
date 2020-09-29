@@ -1,9 +1,9 @@
 {
     "HP": "7",
+    "base_HP": 7,
     "MP": "empty",
     "age": "empty",
     "alignment": "empty",
-    "proficiency": "empty",
     "attack": "empty",
     "defense": "12",
     "image": "https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/fire-cat-stasya-tu.jpg",
@@ -29,6 +29,7 @@
     "levels": "1",
     "money": "0",
     "name": "Yvan von Ygnis",
+    "proficiency": "empty",
     "race": "humain",
     "skills": [
         "acrobatics 1",

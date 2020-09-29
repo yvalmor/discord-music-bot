@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "dependencies": {
     "@discordjs/opus": "^0.3.2",
+    "canvas": "^2.6.1",
     "discord.js": "git+https://github.com/discordjs/discord.js.git",
     "discord.js-commando": "git+https://github.com/discordjs/Commando.git",
     "ffmpeg-static": "^4.2.6",
+    "pdfkit": "^0.11.0",
     "simple-youtube-api": "^5.2.1",
+    "sqlite": "^3.0.0",
     "ytdl-core": "^3.1.2"
   }
 }

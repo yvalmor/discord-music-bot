@@ -54,7 +54,7 @@ module.exports = class Print extends Command {
                 size: [1449, 2048]
             });
 
-            doc.pipe(fs.createWriteStream('output.pdf'));
+            doc.pipe(fs.createWriteStream(`./${file}.pdf`));
 
             doc.image('sheet.png', 0, 0, {});
 
@@ -69,11 +69,11 @@ module.exports = class Print extends Command {
 
             message.reply({
                 files: [
-                    './output.pdf'
+                    `./${file}.pdf`
                 ]
                 })
                 .catch(e => console.error(e))
-                .then();
+                .then(fs.unlinkSync(`./${file}.pdf`));
         }
     }
 }

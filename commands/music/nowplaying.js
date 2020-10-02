@@ -15,9 +15,8 @@ module.exports = class NowPlayingCommand extends Command {
 
     run(message) {
         if (
-            (!message.guild.musicData.isPlaying &&
-                !message.guild.musicData.nowPlaying) ||
-            message.guild.triviaData.isTriviaRunning
+            !message.guild.musicData.isPlaying &&
+                !message.guild.musicData.nowPlaying
         ) {
             return message.say('There is no song playing right now!');
         }

@@ -29,9 +29,7 @@ module.exports = class Print extends Command {
 
         const files = names.split(', ');
 
-        for (let fileName of files) {
-            let file = fileName.replace('_', ' ');
-
+        for (let file of files) {
             const path =
                 `${process.cwd()}/characters/${message.guild.name}/${file}.json`;
             try {
@@ -67,13 +65,15 @@ module.exports = class Print extends Command {
             doc.save()
                 .end();
 
-            message.reply({
-                files: [
-                    `./${file}.pdf`
-                ]
-                })
-                .catch(e => console.error(e))
-                .then(fs.unlinkSync(`./${file}.pdf`));
+            message.reply('Sending file...').then(
+                message.reply({
+                    files: [
+                        `./${file}.pdf`
+                    ]
+                    })
+                    .catch(e => console.error(e))
+                    .then()
+            );
         }
     }
 }

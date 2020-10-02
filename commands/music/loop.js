@@ -23,8 +23,7 @@ module.exports = class LoopCommand extends Command {
         if (!message.guild.musicData.isPlaying) {
             return message.say('There is no song playing right now!');
         } else if (
-            message.guild.musicData.isPlaying &&
-            message.guild.triviaData.isTriviaRunning
+            message.guild.musicData.isPlaying
         ) {
             return message.say('You cannot loop over a trivia!');
         }

@@ -6,10 +6,10 @@ const fs = require('fs');
 module.exports = class See extends Command {
     constructor(client) {
         super(client, {
-            name: 'see',
-            memberName: 'see',
+            name: 'seestat',
+            memberName: 'seestat',
             group: 'rpg',
-            aliases: ['see-character'],
+            aliases: ['see-stat'],
             guildOnly: true,
             description:
                 'See a character and its data',
@@ -20,16 +20,22 @@ module.exports = class See extends Command {
                     type: 'string',
                     wait: 90
                 },
+                {
+                    key: 'stat_name',
+                    prompt: 'What\'s the name of the stat you want to see?',
+                    type: 'string',
+                    wait: 90
+                }
             ]
         });
     }
 
-    async run(message, { character_name }) {
+    async run(message, { character_name, stat_name }) {
 
         const path =
             `${process.cwd()}/characters/${message.guild.name}/${
                 character_name === 'Tiramisu' || character_name.replace('_', ' ') === 'Tiramisu Uchiha' ?
-                'Tsunami Uchiha' : character_name.replace('_', ' ')}.json`;
+                    'Tsunami Uchiha' : character_name.replace('_', ' ')}.json`;
         try {
             fs.existsSync(path)
         } catch (e) {
@@ -110,7 +116,7 @@ module.exports = class See extends Command {
         if (proficiency !== null_word)
             character.addField('proficiency: ', proficiency, true);
 
-        if (traits !== null_word) {
+        if (traits !== null_word && (stat_name === '' || stat_name === 'traits')) {
             let trait = '';
             for (let t in traits)
                 trait += `${traits[t]}\n`;
@@ -119,7 +125,7 @@ module.exports = class See extends Command {
             character.addField('Traits:', trait, true);
         }
 
-        if (skills !== null_word) {
+        if (skills !== null_word && (stat_name === '' || stat_name === 'skills')) {
             let skill = '';
             for (let s in skills)
                 skill += `${skills[s]}\n`;
@@ -128,7 +134,7 @@ module.exports = class See extends Command {
             character.addField('Skills:', skill, true);
         }
 
-        if (spells !== null_word) {
+        if (spells !== null_word && (stat_name === '' || stat_name === 'spells')) {
             let spell = '';
             for (let s in spells)
                 spell += `${spells[s]}\n`;
@@ -138,7 +144,7 @@ module.exports = class See extends Command {
             character.addField('Spells:', spell, true);
         }
 
-        if (stats !== null_word) {
+        if (stats !== null_word && (stat_name === '' || stat_name === 'stats')) {
             character.addField('\u200B', '\u200B');
 
             let stat = '';
@@ -151,8 +157,8 @@ module.exports = class See extends Command {
             character.addField('Stats:', stat, true);
         }
 
-        if (inventory !== null_word) {
-            if (stats === null_word)
+        if (inventory !== null_word && (stat_name === '' || stat_name === 'inventory')) {
+            if (stats === null_word || stat_name === 'inventory')
                 character.addField('\u200B', '\u200B');
 
             let invent = '';

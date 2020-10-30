@@ -22,7 +22,7 @@ module.exports = class See extends Command {
                 },
                 {
                     key: 'stat_name',
-                    prompt: 'What\'s the name of the value you want to see?',
+                    prompt: 'What\'s the name of the stat you want to see?',
                     type: 'string',
                     default: '',
                     wait: 90

@@ -89,6 +89,7 @@ module.exports = class PlayCommand extends Command {
                 .replace(/(>|<)/gi, '')
                 .split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
             const id = query[2].split(/[^0-9a-z_\-]/i)[0];
+            console.log(id);
             const video = await youtube.getVideoByID(id).catch(function() {
                 return message.say(
                     'There was a problem getting the video you provided!'

@@ -311,7 +311,8 @@ module.exports = class Create extends Command {
         if (money !== null_word)
             character.addField('money: ', money, true);
 
-        if (ali)
+        if (alignement !== null_word)
+            character.addField('alignment: ', alignement, true);
 
         if (traits !== null_word) {
             character.addField('\u200B', '\u200B');

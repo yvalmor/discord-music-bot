@@ -45,11 +45,13 @@ module.exports = class ReloadCommand extends Command {
             nbWin = 0;
 
         let rolls = "";
+        let total = 0;
 
         for (let i = 0; i < rollNumber; i++) {
             console.log(i)
 
             rnd = Math.floor(Math.random() * faces + 1);
+            total += rnd;
 
             if (rnd == faces) {
                 rolls += `Roll n°${i + 1}: ${rnd.toString()}, réussite critique\n`;
@@ -61,7 +63,7 @@ module.exports = class ReloadCommand extends Command {
                 rolls += `Roll n°${i + 1}: ${rnd.toString()}\n`;
         }
 
-        rollResults.addField('Rolls:', rolls);
+        rollResults.addField('Rolls:\t\t', rolls, true);
 
         if (nbFail < nbWin) {
             rollResults.setImage(this.random_item(success));
@@ -69,6 +71,9 @@ module.exports = class ReloadCommand extends Command {
         else if (nbFail > nbWin) {
             rollResults.setImage(this.random_item(failure));
         }
+
+        if (rollNumber > 1)
+            rollResults.addField('Total:', total, true);
 
         await message.channel.send({ embed: rollResults });
     }

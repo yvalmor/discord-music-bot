@@ -22,10 +22,6 @@ module.exports = class LoopCommand extends Command {
     run(message, { numOfTimesToLoop }) {
         if (!message.guild.musicData.isPlaying) {
             return message.say('There is no song playing right now!');
-        } else if (
-            message.guild.musicData.isPlaying
-        ) {
-            return message.say('You cannot loop over a trivia!');
         }
 
         for (let i = 0; i < numOfTimesToLoop; i++) {

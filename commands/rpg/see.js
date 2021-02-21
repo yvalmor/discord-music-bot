@@ -87,6 +87,7 @@ module.exports = class See extends Command {
                 break;
         }
 
+        console.log(image);
 
         if (image !== null_word)
             character.setThumbnail(image);
@@ -159,7 +160,10 @@ module.exports = class See extends Command {
 
             for (let s in inventory) {
                 const key = Object.keys(inventory[s])[0];
-                invent += `${key}: ${inventory[s][key]}\n`;
+                if (inventory[s][key] == '1')
+                    invent += `${key}\n`;
+                else
+                    invent += `${key}: ${inventory[s][key]}\n`;
             }
 
             character.addField('Inventory:', invent, true);

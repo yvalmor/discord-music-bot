@@ -2,7 +2,7 @@
   "name": "discord music bot",
   "version": "1.0.0",
   "dependencies": {
-    "@discordjs/opus": "^0.3.2",
+    "@discordjs/opus": "^0.9.0",
     "canvas": "^2.6.1",
     "discord.js": "git+https://github.com/discordjs/discord.js.git",
     "discord.js-commando": "git+https://github.com/discordjs/Commando.git",
